@@ -1,0 +1,335 @@
+﻿<!DOCTYPE html>
+<html>
+	<!-- #BeginTemplate "Sjabloon.dwt" -->
+	<head>
+		<!-- #BeginEditable "doctitle" -->
+		
+		<title>Posting data to the server</title>
+		
+		<!-- #EndEditable -->
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<!-- The following is required so phones determine text size and stuff based on ACTUAL window size, and not some virtual larger size -->
+		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		
+		<!-- CSS for the menu -->
+		<link href="css/helper.css" media="screen" rel="stylesheet" type="text/css" />
+		<link href="css/dropdown.linear.columnar.css" rel="stylesheet" type="text/css" />
+		<link href="css/default.advanced.css" rel="stylesheet" type="text/css" />
+		
+		<!-- CSS for the page styling -->
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/responsive.css" />
+		<style>
+			/* Transforming the title: */
+			#title { 
+				text-shadow:1px 1px 1px hsl(200,50%,20%);
+				-webkit-animation: myTransformation 3.5s cubic-bezier(.9,-0.2,.8,.25) 0s, myShadow 6s ease-out 3s infinite alternate;/* 0s infinite alternate; /* Chrome, Safari, Opera */
+	    		animation: myTransformation 3.5s cubic-bezier(.9,-0.2,.8,.25) 0s, myShadow 6s ease-out 3s infinite alternate;/* infinite alternate;
+	    		/* This should stop it at the end of the animation (use fillmode AFTER animation): /**/
+	    		-webkit-animation-fill-mode: forwards;
+				animation-fill-mode: forwards;/**/
+				}
+			
+			/* Code for Chrome, Safari and Opera */
+			@-webkit-keyframes myTransformation {
+			    0% 		{transform:rotate(0deg) translateX(150px) translateY(35px) scale(.4);}
+			    100% 	{transform:rotate(-2deg) translateX(-5px) translateY(10px) scale(1);}
+			}
+			/* Standard syntax */
+			@keyframes myTransformation {
+			    from 	{transform:rotate(0deg) translateX(150px) translateY(35px) scale(.4);}
+			    to 		{transform:rotate(-2deg) translateX(-5px) translateY(10px) scale(1);}
+			}
+			/* Code for Chrome, Safari and Opera */
+			@-webkit-keyframes myShadow {
+			    0% 		{text-shadow:1px 1px 1px hsl(200,50%,20%);}
+			    15% 	{text-shadow:1px 1px 1px hsl(200,50%,20%);}
+			    40% 	{text-shadow:5px 3px 6px hsl(200,50%,20%);}
+			    100% 	{text-shadow:-3px 5px 9px hsl(200,50%,20%);}
+			}
+			/* Standard syntax */
+			@keyframes myShadow {
+			    0% 		{text-shadow:1px 1px 1px hsl(200,50%,20%);}
+			    15% 	{text-shadow:1px 1px 1px hsl(200,50%,20%);}
+			    40% 	{text-shadow:5px 3px 6px hsl(200,50%,20%);}
+			    100% 	{text-shadow:-3px 5px 9px hsl(200,50%,20%);}
+			}
+		</style>
+		<script src="js/jquery-1.11.3.min.js">
+		</script>
+		<!-- #BeginEditable "TopScripts" -->
+		
+			
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+		
+		<style>
+			/* Transforming the upload data format example picture: */
+			.transform {
+				-ms-transition: all .0s ease-out .25s, -ms-transform .5s cubic-bezier(1,-0.75,0.5,1.2) .0s; 
+				-webkit-transition: all .0s ease-out .25s, -webkit-transform .5s cubic-bezier(1,-0.75,0.5,1.2) .0s; /* For Safari 3.1 to 6.0 */
+			    transition: all .0s ease-out .25s, transform .5s cubic-bezier(1,-0.75,0.5,1.5) .0s, box-shadow .3s ease-out .2s;
+			    
+				-ms-transform: translateY(-200px) scale(3) rotate(360deg);
+				-webkit-transform: translateY(-200px) scale(3) rotate(360deg);
+				transform: translateY(-200px) scale(3) rotate(360deg); /* This also scales borders and such */
+				
+				background: -webkit-linear-gradient(60deg, lightyellow , lightblue) !important; /* For Safari 5.1 to 6.0 */
+				background: -o-linear-gradient(60deg, lightyellow , lightblue) !important; /* For Opera 11.1 to 12.0 */
+				background: -moz-linear-gradient(60deg, lightyellow , lightblue) !important; /* For Firefox 3.6 to 15 */
+				background: linear-gradient(110deg, lightblue 5%, #DEF 45%, #FFF) !important; /* Standard syntax */
+				border:2px #def outset;
+				box-shadow:0px 20px 25px -20px hsl(200,80%,10%);
+				z-index:2000;
+			}
+			.transformback {
+				-ms-transition: all .2s ease-out .25s, -webkit-transform .5s cubic-bezier(1,-0.75,0.5,1.2) .0s; /* For Safari 3.1 to 6.0 */
+				-webkit-transition: all .2s ease-out .25s, -webkit-transform .5s cubic-bezier(1,-0.75,0.5,1.2) .0s; /* For Safari 3.1 to 6.0 */
+			    transition: all .2s ease-out .25s, transform .5s cubic-bezier(1,-0.75,0.5,1.5) .0s, box-shadow .3s ease-out .2s;
+			    
+				-ms-transform: translateY(0px) scale(1) rotate(-360deg); 
+				-webkit-transform: translateY(0px) scale(1) rotate(-360deg); 
+				transform: translateY(0px) scale(1) rotate(-360deg); /* This also scales borders and such */
+				
+				background: white!important;
+				border:none;
+				box-shadow:none;
+			}
+			/* Showing the check country button: */
+			#showhide {display:none;}
+			.show {display:table-row!important;}
+		</style>
+		<script>
+			window.onload = function () {
+				// The picture that can be clicked:
+				document.getElementById("scalable").onclick = function () {
+						//this.classList.toggle("transform");
+						if (this.classList.contains("transform")){
+							this.classList.remove("transform");
+							this.classList.add("transformback");
+						} else {
+							this.classList.remove("transformback"); 
+							this.classList.add("transform");
+						}
+				}
+				// Submitting country data to the server:
+				$("form").submit(function () {
+					submitData();
+					// To prevent other functions performed by default when the submit method is invoked (page reload etc):
+					return false;
+				});	
+				// Indien een nieuwe country wordt gekozen:
+				document.getElementById("country").addEventListener("change", function(){
+					// Maak de tabel rij met de country check knop zichtbaar:
+					document.getElementById("showhide").classList.add("show");
+					
+					// De knop voor het checken van het aantal punten in de polygon:
+					document.getElementById("checkcountry").onclick = function () {
+						
+						var countryValue = document.getElementById("country").value;
+						
+						// Replace any whitespaces in the countryname by a dash:
+						countryValue = countryValue.replace(/\s+/g, '-');
+						
+						// Maak alles lowercase (kan geen kwaad):
+						var country = countryValue.toLowerCase();
+
+						$.ajax({
+							url: "http://www.rogerkeizer.nl/service/api/country/borderdata/" + country, // Add the value of the selected option to the url to get the data for it
+							cache: false,
+							type: "GET", 
+							success:function(data){
+								var result = data.Message;
+								//var result = JSON.stringify(data);
+								document.getElementById("countryInfo").style.fontWeight='normal';
+								document.getElementById("countryInfo").style.color='black';
+								document.getElementById("countryInfo").innerHTML=result; //
+							},
+					    	error: function (xhr, textStatus, errorThrown) {
+								document.getElementById("countryInfo").style.fontWeight='bold';
+								document.getElementById("countryInfo").style.color='#4488FF';
+								document.getElementById("countryInfo").innerHTML="Something went wrong while requesting the data here:<br />http://www.rogerkeizer.nl/service/api/country/borderdata/" + country ;
+							} 
+						}); 
+					}
+				});
+			}
+		</script>
+		
+		
+		<!-- #EndEditable -->
+	
+	</head>
+	<body>
+		<div id="wrapper" >
+			<div id="titlebar">
+				<header>
+					<div id="logo">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+						  <title>HTML5 Logo</title>
+						  <polygon fill="#E44D26" points="107.644,470.877 74.633,100.62 437.367,100.62 404.321,470.819 255.778,512"/>
+						  <polygon fill="#F16529" points="256,480.523 376.03,447.246 404.27,130.894 256,130.894"/>
+						  <polygon fill="#EBEBEB" points="256,268.217 195.91,268.217 191.76,221.716 256,221.716 256,176.305 255.843,176.305 142.132,176.305 143.219,188.488 154.38,313.627 256,313.627"/>
+						  <polygon fill="#EBEBEB" points="256,386.153 255.801,386.206 205.227,372.55 201.994,336.333 177.419,336.333 156.409,336.333 162.771,407.634 255.791,433.457 256,433.399"/>
+						  <path d="M108.382,0h23.077v22.8h21.11V0h23.078v69.044H152.57v-23.12h-21.11v23.12h-23.077V0z"/>
+						  <path d="M205.994,22.896h-20.316V0h63.72v22.896h-20.325v46.148h-23.078V22.896z"/>
+						  <path d="M259.511,0h24.063l14.802,24.26L313.163,0h24.072v69.044h-22.982V34.822l-15.877,24.549h-0.397l-15.888-24.549v34.222h-22.58V0z"/>
+						  <path d="M348.72,0h23.084v46.222h32.453v22.822H348.72V0z"/>
+						  <polygon fill="#FFFFFF" points="255.843,268.217 255.843,313.627 311.761,313.627 306.49,372.521 255.843,386.191 255.843,433.435 348.937,407.634 349.62,399.962 360.291,280.411 361.399,268.217 349.162,268.217"/>
+						  <polygon fill="#FFFFFF" points="255.843,176.305 255.843,204.509 255.843,221.605 255.843,221.716 365.385,221.716 365.385,221.716 365.531,221.716 366.442,211.509 368.511,188.488 369.597,176.305"/>
+						</svg>
+					</div>
+					<hgroup>
+						<h1 id ="title" style="padding:0;margin:0;">
+							IVIK Training <span style="display:inline-block;">Rik B&copy;uwman</span>
+						</h1>
+					</hgroup>
+				</header>
+			</div> <!-- close titlebar -->
+			<nav>
+				<ul id="nav" class="dropdown dropdown-linear dropdown-columnar">
+					<li><a href="index.html">Home</a></li>
+					<li class="dir">Country API
+						<ul>
+							<li class="dir">GeoJSON Download
+								<ul>
+									<li><a href="map.html">AJAX request (GET)</a></li>
+									<li><a href="randomize.html">...</a></li>
+									<li><a href="randomize.html">...</a></li>
+								</ul>
+							</li>
+							<li class="dir">GeoJSON Upload
+								<ul>
+									<li><a href="upload.html">AJAX upload (POST)</a></li>
+									<li><a href="randomize.html">...</a></li>
+								</ul>
+							</li>
+							<li class="dir">Next Submenu
+								<ul>
+									<li><a href="randomize.html">Practice bits</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li class="dir">Other
+						<ul>
+							<li class="dir">Room
+								<ul>
+									<li><a href="randomize.html">...</a></li>
+									<li><a href="randomize.html">...</a></li>
+									<li><a href="randomize.html">...</a></li>
+								</ul>
+							</li>
+							<li class="dir">for
+								<ul>
+									<li><a href="randomize.html">...</a></li>
+									<li><a href="randomize.html">...</a></li>
+									<li><a href="randomize.html">...</a></li>
+								</ul>
+							</li>
+							<li class="dir">more
+								<ul>
+									<li><a href="randomize.html">...</a></li>
+									<li><a href="randomize.html">...</a></li>
+									<li><a href="randomize.html">...</a></li>
+								</ul>
+							</li>
+							<li class="dir">submenu's
+								<ul>
+									<li><a href="randomize.html">...</a></li>
+									<li><a href="randomize.html">...</a></li>
+									<li><a href="randomize.html">...</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+			<div id="contentwrapper">
+		<!-- #BeginEditable "Content" -->
+			
+			<div id="content" style="width:100%">
+				<form>
+					<div>
+						<hgroup>
+							<h1>Upload geoData</h1>
+						</hgroup>
+						<table style="width:90%; max-width:600px;">
+							<tr>
+								<td style="width:20%; min-width:60px;">Country:
+								</td>
+								<td style="width:80%; min-width:150px;">
+									<select id="regions" title="Region" style="width:49%;" >
+										<option>Dit had een lijst moeten zijn</option>
+									</select>
+								
+									<select id="country" title="Country" style="width:49%;">
+										<option>Awaiting selection...</option>
+									</select>
+								</td>
+							</tr>
+							<tr id="showhide">
+								<td>
+									<input type="button" id="checkcountry" value="Check country"/>
+								</td>
+								<td id="countryInfo">
+									<!--iframe id="countryInfo" src="#" width=100% height=15></iframe-->
+								</td>
+							</tr>
+							<tr>
+								<td>
+									GeoJSON Data:
+								</td>
+								<td >
+								<!-- Remember: indented code in a 'textarea' introduces all the 'tabs' into the textarea -->
+									<textarea id="GeoJSONData" rows="5" class="inputwidth" style="border:1px white inset; width:95%;"></textarea>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="submit" value="Verstuur"/>
+								</td>
+								<td id="feedback" style="color:red;">
+								</td>
+							</tr>
+						</table>
+						<div style="padding:10px 0; width:90%; max-width:600px; background-color:rgba(255,255,255,0.3); margin:10px auto;">
+							<p style="text-align:left;">Select a country first, to see wether data is already available
+							<br />To create new geo data for a country in the correct format, visit the site "<a href="http://geojson.io" target="_blank" title="(Opens in new tab/window)">http://geojson.io</a>".
+							<br />Use the tools to draw a polygon around a country and when done, copy/paste the JSON data in the above input field.
+							<br />Examples of countries that should already contain geo data: Albany, Belgium, Denmark, France, Italy, Netherlands, Austria, Spain.</p>
+						</div>
+					</div>
+				</form>
+				<div style="padding:10px 0; width:90%; max-width:600px; background-color:rgba(255,255,255,0.3); margin:10px auto;">
+					<figure>
+						<h2>JSON Data needs to be in the following format:</h2>
+						<img id="scalable" src="img/landen-geojson.png" alt="Expected geoJSON data input format" title="(click to see this enhanced awesomely (IE&gt;9 only)" style="width:184px;background-color:#FFF;"/>
+						<figcaption>Fig 1-1 geoJSON data input format</figcaption>
+					</figure>
+				</div>
+					
+				<!--div id="geoResults">
+					<p></p>
+				</div>
+				<div id="results"></div-->
+
+			</div> <!-- Close #content -->
+		
+		<!-- #EndEditable -->
+			</div> <!-- Close #contentwrapper -->
+		</div> <!-- Close #wrapper -->
+		<div id="footer">
+			<p>&copy; R. Bouwman - Microsoft 70-480 Training</p>
+		</div>
+
+		<!-- #BeginEditable "BottomScripts" -->
+		
+		<script src="js/RIK_filldropdowns.js"></script>
+		<script src="js/RIK_submitdata.js"></script>
+		
+		<!-- #EndEditable -->
+	</body>
+<!-- #EndTemplate -->
+</html>

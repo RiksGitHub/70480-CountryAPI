@@ -1,0 +1,470 @@
+﻿<!DOCTYPE html>
+<html>
+	<!-- #BeginTemplate "Sjabloon.dwt" -->
+	<head>
+		<!-- #BeginEditable "doctitle" -->
+		
+		<title>Web worker - Bouncing ball</title>
+		
+		<!-- #EndEditable -->
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<!-- The following is required so phones determine text size and stuff based on ACTUAL window size, and not some virtual larger size -->
+		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		
+		<!-- CSS for the menu -->
+		<link href="css/helper.css" media="screen" rel="stylesheet" type="text/css" />
+		<link href="css/dropdown.linear.columnar.css" rel="stylesheet" type="text/css" />
+		<link href="css/default.advanced.css" rel="stylesheet" type="text/css" />
+		
+		<!-- CSS for the page styling -->
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/responsive.css" />
+		<style>
+
+			/* Transforming the title: */
+			#title { 
+				text-shadow:1px 1px 1px hsl(200,50%,20%);
+				-webkit-animation: myTransformation 3.5s cubic-bezier(.9,-0.2,.8,.25) 0s, myShadow 6s ease-out 3s infinite alternate;/* 0s infinite alternate; /* Chrome, Safari, Opera */
+	    		animation: myTransformation 3.5s cubic-bezier(.9,-0.2,.8,.25) 0s, myShadow 6s ease-out 3s infinite alternate;/* infinite alternate;
+	    		/* This should stop it at the end of the animation (use fillmode AFTER animation): /**/
+	    		-webkit-animation-fill-mode: forwards;
+				animation-fill-mode: forwards;/**/
+				}
+			
+			/* Code for Chrome, Safari and Opera */
+			@-webkit-keyframes myTransformation {
+			    0% 		{transform:rotate(0deg) translateX(150px) translateY(35px) scale(.4);}
+			    100% 	{transform:rotate(-2deg) translateX(-5px) translateY(10px) scale(1);}
+			}
+			/* Standard syntax */
+			@keyframes myTransformation {
+			    from 	{transform:rotate(0deg) translateX(150px) translateY(35px) scale(.4);}
+			    to 		{transform:rotate(-2deg) translateX(-5px) translateY(10px) scale(1);}
+			}
+			/* Code for Chrome, Safari and Opera */
+			@-webkit-keyframes myShadow {
+			    0% 		{text-shadow:1px 1px 1px hsl(200,50%,20%);}
+			    15% 	{text-shadow:1px 1px 1px hsl(200,50%,20%);}
+			    40% 	{text-shadow:5px 3px 6px hsl(200,50%,20%);}
+			    100% 	{text-shadow:-3px 5px 9px hsl(200,50%,20%);}
+			}
+			/* Standard syntax */
+			@keyframes myShadow {
+			    0% 		{text-shadow:1px 1px 1px hsl(200,50%,20%);}
+			    15% 	{text-shadow:1px 1px 1px hsl(200,50%,20%);}
+			    40% 	{text-shadow:5px 3px 6px hsl(200,50%,20%);}
+			    100% 	{text-shadow:-3px 5px 9px hsl(200,50%,20%);}
+			}
+		</style>
+		<script src="js/jquery-1.11.3.min.js">
+		</script>
+		<!-- #BeginEditable "TopScripts" -->
+		
+			
+		<style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			.windowDiv{display:inline-block; position:relative; margin:10px auto; padding:10px;
+						border:2px white outset; text-align:center; width:51%; min-width:350px;
+						background-color:hsl(200,30%,60%); background-color:hsla(200,30%,60%,0.4)}
+			#aText	{font-size:large; color:hsl(200,10%,95%); text-shadow:1px 1px 1px hsl(200,50%,50%);}
+			img 	{margin:5px 0;}
+			img:hover {cursor: pointer;}
+			canvas {border: 1px white outset; 
+				background-color:#888;
+				background: linear-gradient(10deg, #FFCC99 5%, #DEF 65%, #FFF);
+			}
+		</style>
+		
+		<script>
+			
+			// A function 'requestAnimFrame', that takes a function 'callback' as inputparameter, and starts it after a certain interval (?)
+			window.requestAnimFrame = function(){
+			    return (
+			        window.requestAnimationFrame       || 
+			        window.webkitRequestAnimationFrame || 
+			        window.mozRequestAnimationFrame    || 
+			        window.oRequestAnimationFrame      || 
+			        window.msRequestAnimationFrame     || 
+			        function(callback){
+			            window.setTimeout(callback, 1000 / 30);
+			        }
+			    );
+			}();
+			
+			// The 'setTimeout' method calls a specified function after the specified delay.
+			// A 'setInterval' would call the specified function repeatedly after each specified time interval.
+			window.setTimeout(getDirection, 100); // Changes direction (once) after 1 time set here
+			var x = 150, y = 100, w = 600, h = 600, r = 15;
+			var rgbFill ="blue";
+			var d,c,s;
+			var rColor,gColor,bColor;
+			var hd = "r"; // hd be direction ('l','r','u','d': left or right, up or down)
+			var horizontal = true;
+			window.onload = function () {
+				try {
+					c = document.getElementById("c"); // "c" is the canvas
+					w = c.width;
+					h = c.height;
+					// The parseInt() function parses a string and returns an integer. Only the first number in the string is returned.
+					// If the first character cannot be converted to a number, parseInt() returns NaN.
+					s = parseInt( document.getElementById("speedy").value); // "speedy" is the ranger, so 's' will be speed (of beter: 'step' (stapgrootte))
+					getDirection();
+					drawBall();
+					
+					// Get the button to start the 'intensive work'
+					//document.getElementById("intensiveWork").onclick = function () { DoIntensiveWork(); };
+					
+					var beserk;
+					
+					document.getElementById("beserk").onclick = function () {
+						clearInterval(beserk);
+						document.getElementById("speedy").value="12";
+						document.getElementById("aText").innerHTML = 'Speed: 12'
+						beserk = setInterval(getDirection, 100);
+					}
+					document.getElementById("chill").onclick = function () {
+						clearInterval(beserk);
+						document.getElementById("speedy").value="2";
+						document.getElementById("aText").innerHTML = 'Speed: 2'
+						window.setTimeout(getDirection, 0); // Changes direction (once) after 1 time set here
+					}
+
+					document.getElementById("intensiveWork").onclick = function () {
+						var result = document.getElementById("workResult");
+						result.innerHTML = "Calculating...";
+						//Create a worker (to do calculations asynchronous)
+						var worker = new Worker("js/RIK_CalculateWorker.js");
+						// When the worker reports back:
+						worker.onmessage = function (evt) {
+							try {
+								result.innerHTML = 'Work result: '+ evt.data.toExponential(3); // 'toExponential(3)' makes it 3 digits after the comma
+							} catch (e) {
+								alert(e.message);
+							}
+						}
+						// When the worker gives an error:
+						worker.onerror = function (err) {
+							alert(err.message + err.filename + err.lineno);
+						}
+						// Now that the above is set up, start the worker:
+						worker.postMessage("");
+						// Make sure it can be terminated with the button:
+						document.getElementById("stopWorker").onclick = function () {
+							worker.terminate();
+							var result = document.getElementById("workResult");
+							result.innerHTML = "Worker stopped!";
+
+						}
+					};
+					// Not sure how the below works, but mozilla needs window.event as a parameter, else it won't work.
+					document.onkeydown = function (e) {
+						var evt = e || window.event;
+						switch (evt.keyCode) {
+							case 40: // Keycode 40 = DOWN arrow
+								horizontal = false;
+								hd = "d";
+								break;
+							case 37: // Keycode 37 = LEFT arrow
+								horizontal = true;
+								hd = "l";
+								break;
+							case 38: // Keycode 38 = UP arrow
+								horizontal = false;
+								hd = "u";
+								break;
+							case 39: // Keycode 39 = RIGHT arrow
+								horizontal = true;
+								hd = "r";
+								break;
+						}
+					}
+				} catch (e) {
+					alert(e.message);
+				}
+			}
+			function increaseSpeed() { // By increasing step size s
+				s++;
+				document.getElementById("speedy").value = s;
+			}
+			function decreaseSpeed() { // By decreasing step size s
+				s--;
+				document.getElementById("speedy").value = s;
+			}
+			function changeDirection() {
+				var cx = window.event.offsetX;
+				var cy = window.event.offsetY;
+				x = cx;
+				y = cy;
+				document.getElementById("speedy").value = s;
+			}
+			
+			function setNewPoint(d) { // 'd' might stand for direction
+				try{
+					switch (horizontal) { // Check if d = 'horizontal'
+					case true:
+						if (x < (w - r) && hd == "r") // Indien niet tegen de rechter rand && bewegend naar rechts
+							x += s; // stap naar rechts
+						else if(x > r && hd == "l") // Indien niet tegen de linker rand && bewegend naar links
+							x -= s; // stap naar links
+						break;
+					case false: // 'd' = verticaal (of horizontal = false)
+						if (y < (h - r) && hd == "d")
+							y += s;
+						else if (y > r && hd == "u")
+							y -= s;
+						break;
+					}
+					// Verander de kleur en richting als de rand wordt geraakt:
+					if (x >= (w - r)) { // Indien tegen of voorbij de rechterrand; maak hd direction naar left 'l'
+						hd = "l";
+						var red = Math.round(Math.random()*255);
+						var green = Math.round(Math.random()*255);
+						var blue = Math.round(Math.random()*255);
+						var clr = document.getElementById("ballColor");
+						clr.innerHTML = "R: "+red+"<br />G: "+green+"<br />B: "+blue;
+						rgbFill = "rgb("+red+","+green+","+blue+")";
+					}
+					if (x <= r) {
+						hd = "r";
+						var red = Math.round(Math.random()*255);
+						var green = Math.round(Math.random()*255);
+						var blue = Math.round(Math.random()*255);
+						var clr = document.getElementById("ballColor");
+						clr.innerHTML = "R: "+red+"<br />G: "+green+"<br />B: "+blue;
+						rgbFill = "rgb("+red+","+green+","+blue+")";
+					}
+					if (y >= (h - r)){
+						hd = "u";
+						var red = Math.round(Math.random()*255);
+						var green = Math.round(Math.random()*255);
+						var blue = Math.round(Math.random()*255);
+						var clr = document.getElementById("ballColor");
+						clr.innerHTML = "R: "+red+"<br />G: "+green+"<br />B: "+blue;
+						rgbFill = "rgb("+red+","+green+","+blue+")";
+					}
+					if (y <= r){
+						hd = "d";
+						var red = Math.round(Math.random()*255);
+						var green = Math.round(Math.random()*255);
+						var blue = Math.round(Math.random()*255);
+						var clr = document.getElementById("ballColor");
+						clr.innerHTML = "R: "+red+"<br />G: "+green+"<br />B: "+blue;
+						rgbFill = "rgb("+red+","+green+","+blue+")";
+					}
+				} catch (e) {
+					alert(e.message);
+				}
+			}
+			function getDirection() {
+				// '!' is the 'logical NOT operator' in JavaScript. Case the result of the evaluation and convert it to a boolean, then make it the opposite.
+				// 1. Take 'horizontal' and evaluate it. 2. If it exists: true, if undefined: false. 3. Now take the opposite.
+				horizontal = !horizontal; // If horizontal is undefined, horizontal = true. If horizontal is defined/true, horizontal = false.
+				
+				// 'Math.ceil()' rounds a number upward to it's nearest integer.
+				// 'Math.random()' returns a random number between 0 (inclusive) and 1 (exclusive).
+				var d = Math.ceil(Math.random() * 2); // 'd' might stand for direction
+				if (horizontal) {
+					if (d == 1) {
+						hd = "r";
+					} else {
+						hd = "l";
+					}
+				} else {
+					if (d == 1) {
+						hd = "u";
+					} else {
+						hd = "d";
+					}
+				}
+			}
+			
+			function drawBall() {
+				try {
+					// randomize stroke color everytime it's redrawn:
+					var red = Math.round(Math.random()*255);
+					var green = Math.round(Math.random()*255);
+					var blue = Math.round(Math.random()*255);
+					var rgbStroke = "rgb("+red+","+green+","+blue+")";//"rgb(128,128,128)";
+					setNewPoint(d);
+					var ctxt = c.getContext("2d");
+					ctxt.clearRect(0, 0, c.width, c.height);
+					ctxt.beginPath();
+					ctxt.lineWidth = "2";
+					ctxt.strokeStyle = rgbStroke;
+					ctxt.arc(x, y, r, 0, 360);
+					ctxt.fillStyle = rgbFill;
+					ctxt.fill();
+					ctxt.stroke();
+					s = parseInt(document.getElementById("speedy").value); // Converts the value (that is read as a string) to an integer
+					requestAnimFrame(function () { // After a certain interval, it repeats itself, I think
+						drawBall();
+					});
+				} catch (e) {
+					alert(e.message);
+				}
+			}
+			
+		</script>
+		
+		
+		<!-- #EndEditable -->
+	
+	</head>
+	<body>
+		<div id="wrapper" >
+			<div id="titlebar">
+				<header>
+					<div id="logo">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+						  <title>HTML5 Logo</title>
+						  <polygon fill="#E44D26" points="107.644,470.877 74.633,100.62 437.367,100.62 404.321,470.819 255.778,512"/>
+						  <polygon fill="#F16529" points="256,480.523 376.03,447.246 404.27,130.894 256,130.894"/>
+						  <polygon fill="#EBEBEB" points="256,268.217 195.91,268.217 191.76,221.716 256,221.716 256,176.305 255.843,176.305 142.132,176.305 143.219,188.488 154.38,313.627 256,313.627"/>
+						  <polygon fill="#EBEBEB" points="256,386.153 255.801,386.206 205.227,372.55 201.994,336.333 177.419,336.333 156.409,336.333 162.771,407.634 255.791,433.457 256,433.399"/>
+						  <path d="M108.382,0h23.077v22.8h21.11V0h23.078v69.044H152.57v-23.12h-21.11v23.12h-23.077V0z"/>
+						  <path d="M205.994,22.896h-20.316V0h63.72v22.896h-20.325v46.148h-23.078V22.896z"/>
+						  <path d="M259.511,0h24.063l14.802,24.26L313.163,0h24.072v69.044h-22.982V34.822l-15.877,24.549h-0.397l-15.888-24.549v34.222h-22.58V0z"/>
+						  <path d="M348.72,0h23.084v46.222h32.453v22.822H348.72V0z"/>
+						  <polygon fill="#FFFFFF" points="255.843,268.217 255.843,313.627 311.761,313.627 306.49,372.521 255.843,386.191 255.843,433.435 348.937,407.634 349.62,399.962 360.291,280.411 361.399,268.217 349.162,268.217"/>
+						  <polygon fill="#FFFFFF" points="255.843,176.305 255.843,204.509 255.843,221.605 255.843,221.716 365.385,221.716 365.385,221.716 365.531,221.716 366.442,211.509 368.511,188.488 369.597,176.305"/>
+						</svg>
+					</div>
+					<hgroup>
+						<h1 id ="title" style="padding:0;margin:0;">
+							IVIK Training <span style="display:inline-block;">Rik B&copy;uwman</span>
+						</h1>
+					</hgroup>
+				</header>
+			</div> <!-- close titlebar -->
+			<nav>
+				<ul id="nav" class="dropdown dropdown-linear dropdown-columnar">
+					<li><a href="index.html">Home</a></li>
+					<li class="dir">Country API
+						<ul>
+							<li class="dir">GeoJSON Download
+								<ul>
+									<li><a href="map.html">AJAX request (GET)</a></li>
+									<li><a href="randomize.html">...</a></li>
+									<li><a href="randomize.html">...</a></li>
+								</ul>
+							</li>
+							<li class="dir">GeoJSON Upload
+								<ul>
+									<li><a href="upload.html">AJAX upload (POST)</a></li>
+									<li><a href="randomize.html">...</a></li>
+								</ul>
+							</li>
+							<li class="dir">Next Submenu
+								<ul>
+									<li><a href="randomize.html">Practice bits</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li class="dir">Other
+						<ul>
+							<li class="dir">Room
+								<ul>
+									<li><a href="randomize.html">...</a></li>
+									<li><a href="randomize.html">...</a></li>
+									<li><a href="randomize.html">...</a></li>
+								</ul>
+							</li>
+							<li class="dir">for
+								<ul>
+									<li><a href="randomize.html">...</a></li>
+									<li><a href="randomize.html">...</a></li>
+									<li><a href="randomize.html">...</a></li>
+								</ul>
+							</li>
+							<li class="dir">more
+								<ul>
+									<li><a href="randomize.html">...</a></li>
+									<li><a href="randomize.html">...</a></li>
+									<li><a href="randomize.html">...</a></li>
+								</ul>
+							</li>
+							<li class="dir">submenu's
+								<ul>
+									<li><a href="randomize.html">...</a></li>
+									<li><a href="randomize.html">...</a></li>
+									<li><a href="randomize.html">...</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+			<div id="contentwrapper">
+		<!-- #BeginEditable "Content" -->
+			
+			<div style="position:relative; text-align :center;">
+				<h1>Use arrows to steer</h1>
+			</div>
+			<div class="windowDiv">
+				<span id="aText">Speed: <span style="color:#AAA;">10</span></span>
+				<br />
+				<div style="position:relative; display:inline-block; clear:left;">
+					<div  style="position:absolute; left:5px; bottom:10px; text-align:left;">
+						<p id="ballColor" style="font-size:x-small;">R: 0<br />G: 0<br />B: 255</p>
+					</div>
+					<canvas id="c" width="300" height="200" style="border: 2px solid black; "></canvas>
+				</div>
+				<br />0 <input id="speedy" type="range" min="0" max="20" value="10" style="position:relative; " step="1"/> 20
+				<br /><input id="beserk" type="button" value="Go Beserk!" />
+				<input id="chill" type="button" value="Chill..." />
+			</div>
+			<div class="windowDiv">	
+				<p style="display:block; width:330px; margin:0 auto;">The following button makes the system do a 'synchronous' calculation in the background.
+				<br />(Note to self: If an API call is synchronous, it means that code execution will block (or wait) for the API call to return before continuing.)</p>
+				<br /><input id="intensiveWork2" type="button" value="Without using a Worker" />
+				<p style="display:block; width:330px; margin:0 auto;"> The same calculation can be done using a 'worker' which means it's done asynchronous and the ball movement should not be affected:</p>
+				<br /><input id="intensiveWork" type="button" value="Apply Worker" />
+				<input id="stopWorker" type="button" value="Stop Worker" />
+				<br /><span id="workResult" style="text-align:left">Work result: (press button)</span>
+			</div>
+		
+		<!-- #EndEditable -->
+			</div> <!-- Close #contentwrapper -->
+		</div> <!-- Close #wrapper -->
+		<div id="footer">
+			<p>&copy; R. Bouwman - Microsoft 70-480 Training</p>
+		</div>
+
+		<!-- #BeginEditable "BottomScripts" -->
+		
+		<!-- Link to the heavy calculation (not applied as a worker): -->
+		<script src="js/RIK_Calculate.js"></script>
+
+		<script>
+			
+			document.getElementById("intensiveWork2").onclick = function () { 
+				DoIntensiveWork(); // Defined in js/RIK_Calculate.js
+			};
+
+			document.getElementById("speedy").addEventListener("change", rangeChangeEvent);
+			function rangeChangeEvent() {
+				document.getElementById("aText").innerHTML = 'Speed: ' + this.value;
+			}
+		</script>
+		
+		<!-- #EndEditable -->
+	</body>
+<!-- #EndTemplate -->
+</html>

@@ -1,0 +1,26 @@
+﻿#container 	{border: solid; width: 332px; height: 332px;
+			/*margin-right: auto; margin-left: auto; /**/
+			}
+			
+.hole 		{float: left; background-color: darkgrey; border: solid;
+			width: 160px; height: 160px;}
+
+.item 		{background-color:#C0C0C0; color:#FFFFFF; border-radius:100px;
+			font-size:128px; font-family:Arial, Helvetica, sans-serif;
+			text-align:center; width:140px; height:140px;
+			/*
+			set the user-select property to none. This property is set to keep the user from
+			swiping across the item by mistake and selecting the text, which is the number.
+			*/
+			-webkit-user-select:none;
+			-khtml-user-select:none;
+			-moz-user-select:none;
+			-ms-user-select:none;
+			user-select:none;}
+
+/* To make drag drop work in safari (no clue why this does whatever it does): */
+[draggable=true] {-khtml-user-drag: element;}
+
+
+/* (The dragging class is set in the js file) */
+.dragging 	{background-color: yellow;}

@@ -1,0 +1,52 @@
+﻿@media screen and (max-width: 599px) {
+	#wrapper		{width:100%; 
+					/* background-color:rgb(173,116,230); background-color:rgba(173,116,230,.8); /**/
+					background-color:hsl(200,50%,70%); /* background-color:hsla(200,50%,50%,.8); /**/
+					}
+	#selectionfield	{width:100%; }
+	#content		{width:100%; 
+					/* background-color:hsl(200,50%,50%); background-color:hsla(200,50%,50%,0.15); /**/
+					}
+	#footer 		{width:100%; }
+	#footer p		{font-size:12px; padding-top:4px;}
+	h1#title		{font-size:32px; max-width:80%; margin-top:-3em;}
+}
+
+@media screen and (max-width: 799px) and (min-width: 600px){
+	#wrapper		{width:85%; 
+					background-color:hsl(200,50%,80%); /* background-color:hsla(200,50%,50%,0.6); /**/
+					}
+	#selectionfield	{width:100%;}
+	#content		{width:100%; 
+					/* background-color:hsl(200,50%,50%); background-color:hsla(200,50%,50%,0.15); /**/
+					}
+	#footer 		{width:85%;}
+	#footer p		{font-size:13px; padding-top:3px;}
+	h1#title		{font-size:32px;max-width:90%;}
+}
+
+@media screen and (max-width: 1199px) and (min-width: 800px){
+	#wrapper		{width:800px; 
+					background-color:hsl(200,50%,90%); /* background-color:hsla(200,50%,50%,0.4); /**/
+					}
+	#selectionfield	{width:40%;	}
+	#content		{width:60%;	
+					/* background-color:hsl(200,50%,50%); background-color:hsla(200,50%,50%,0.15); /**/
+					}
+	#footer 		{width:800px;}
+	#footer p		{font-size:14px; padding-top:2px;}
+	h1#title		{font-size:50px;max-width:90%;}
+}
+
+@media screen and (min-width: 1200px) {
+	#wrapper		{width:960px; 
+					background-color:hsl(200,50%,95%); /* background-color:hsla(200,50%,50%,.2); /**/
+	}
+	#selectionfield	{width:35%;	}
+	#content		{width:65%;	
+					/* background-color:hsl(200,50%,50%); background-color:hsla(200,50%,50%,0.15); /**/
+					}
+	#footer 		{width:960px;}
+	#footer p		{font-size:15px; padding-top:1px;}
+	h1#title		{font-size:63px; max-width:90%;}
+}

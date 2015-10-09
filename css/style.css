@@ -1,0 +1,163 @@
+﻿html, body 		{height: 100%; width: 100%; margin:0; padding:0;overflow:auto;}
+
+body 			{background: lightgrey url('../img/paper2.png');}
+div				{position:relative;} /**/
+
+h1,h2			{font-family:Helvetica, "Times New Roman", Times, serif;/**/
+				color:hsl(200,50%,95%);
+				text-shadow: 1px 2px 2px hsl(200,40%,10%);
+				text-shadow: 1px 1px 1px hsla(200,40%,10%,0.9);
+				margin-top:10px;
+				}
+h1				{margin:10px; font-size:large; color:hsl(200,20%,98%);}
+h2				{margin:10px; font-size:medium;}
+
+nav				{}
+				
+figure			{padding:0; padding-top:10px;margin:0;
+				/*background-color:rgb(255,255,255); background-color:rgba(255,255,255,0.5); /**/
+				}
+figcaption		{padding:10px 0;}
+
+#wrapper 		{position:relative; margin:0px auto; 
+				height:auto; min-height:100%; /**/
+				background: url('../img/paper3.png'); /**/
+				/*overflow:hidden; /* hidden makes the box wrap the content, thus filling it with the background color (careful with menu items)*/
+
+				/*height: expression( this.scrollHeight = "100%" ); /* sets min-height for IE */
+				/* The following makes the box wrap the content (useful for background color but careful with menu items)
+				/* the problem is that it also makes IE go bonkers with the 100% height that is no longer 100% as soon as you hover over the nav if it's 100+% wide*/
+				/*overflow:hidden;/**/
+				text-align:center;
+				box-shadow:0px 3px 7px 0px black;}
+
+#titlebar		{min-height:100px; padding-top:15px; color:white;
+				background: -webkit-linear-gradient(-2deg, #FFF 0%, #FF6 10%, hsl(200,50%,50%) 20%, hsla(200,0%,100%,.7) 98%); /* For Safari 5.1 to 6.0 */
+			    background: -o-linear-gradient(-2deg, #FFF 0%, #FF6 10%, hsl(200,50%,50%) 20%, hsla(200,0%,100%,.7) 98%); /* For Opera 11.1 to 12.0 */
+			    background: -moz-linear-gradient(-2deg, #FFF 0%, #FF6 10%, hsl(200,50%,50%) 20%, hsla(200,0%,100%,.7) 98%); /* For Firefox 3.6 to 15 */
+			    background: linear-gradient(-2deg, #FFF 0%, #FF6 10%, hsl(200,50%,50%) 20%, hsla(200,0%,100%,.4) 98%); /* Standard syntax (must be last) */
+				box-shadow: 0 -70px 150px -10px hsl(30,100%,10%);
+				box-shadow: 0 -70px 150px -10px hsla(30,100%,10%,0.9);
+				}
+#titlebar h1	{color:white;}
+
+#contentwrapper	{position:relative; overflow:hidden; height:auto;
+				width:100%; 
+				margin:0; padding:15px 0 25px 0; /* For height of footer */
+				/* background-color:hsla(200,100%,0%,0.2); /**/
+				}
+
+#selectionfield	{display:block;float:left;width:30%; 
+				}
+
+#content		{position:relative; float:left; height:auto; min-height:100%;
+				margin:0; padding:0;
+				text-align:center;
+				}
+
+#footer 		{clear:both; position:relative; overflow:hidden; z-index:100; margin:0 auto;
+				text-align:center;
+				background:url('../img/schaduw.png'); background-size:contain; background-repeat:repeat-x;
+				background-color:hsl(200,70%,80%); 
+				margin-top:-20px; height:20px;}
+#footer p		{margin:0;padding:0; color:hsl(200,30%,98%); text-shadow:1px 1px 1px hsl(200,80%,10%); text-shadow:1px 1px 1px hsla(200,80%,10%,.5)}
+
+#logo			{position:absolute; right:0; top:10px;width:100px; height:100px;}
+
+#mapdiv1 		{display:block; border:2px white outset; width:90%; margin:0 auto; 
+				background-color:hsl(200,20%,90%);
+				background-color:hsla(200,20%,90%,.8); /**/
+				box-shadow: 0 20px 20px -20px hsl(200,40%,10%); margin-bottom:10px;
+				padding:0px 10px 15px 10px;  
+				}
+#mapdiv1 h1		{color:hsl(200,60%,60%);
+				text-shadow:1px 1px hsl(200,50%,20%);
+				font: bold 15px/normal Arial, Helvetica, sans-serif;
+ 				letter-spacing: 2px;
+ 				text-transform: uppercase;
+				}
+#mapdiv2 		{display:inline-block; border:2pt white inset; margin:0; width:95%;
+				}
+
+#map 			{width:100%; height:430px;}
+
+p				{padding:10pt 5pt 0 5pt; margin:0; }
+
+section 		{margin-top: 15px;}
+
+select 			{border:1.5px white inset;
+				padding:3px 0px;
+				background-color:hsl(200,40%,25%); color:white; text-shadow:1px 1px 1px hsl(200,20%,0%);
+				background: -webkit-linear-gradient(hsl(200,40%,40%),hsl(200,40%,10%)); /* For Safari 5.1 to 6.0 */
+			    background: -o-linear-gradient(hsl(200,40%,40%),hsl(200,40%,10%)); /* For Opera 11.1 to 12.0 */
+			    background: -moz-linear-gradient(hsl(200,40%,40%),hsl(200,40%,10%)); /* For Firefox 3.6 to 15 */
+			    background: linear-gradient(hsl(200,40%,40%),hsl(200,40%,10%)); /* Standard syntax (must be last) */
+				margin:0; /**/
+				}
+				
+select option	{
+				background-color:hsl(200,20%,10%); color:hsl(200,100%,95%);
+				text-shadow:none;
+				}
+				
+/* Form fields:*/			
+textarea		{padding:5px; margin-top:5px;}				
+input[type=text], input[type=password],input[type=url],input[type=number], input[type=email]
+				{padding:5px; margin-top:5px;}
+input[type=button], input[type=reset],input[type=submit]
+				{padding:5px; margin-top:5px;}
+button			{padding:5px; margin-top:5px;}
+	
+				
+table			{margin:0 auto; border-spacing: 0; text-align:left; border:1.5px white outset; padding:10px; 
+				box-shadow: 0 20px 20px -20px hsl(200,40%,10%); margin-bottom:10px; background-color:hsl(200,20%,90%);}
+table td		{margin:0; padding:5px;
+				/*border:1pt black solid;/**/
+				}
+				
+#selectionfield table {width:90%; max-width:330px; padding:10px;}
+#content table 	{width:90%; max-width:330px; padding:10px;}
+
+.inputwidth 	{width:100%; font-family: Verdana;  font-size: .8em; }
+
+#scalable		{cursor:pointer;}
+/* Some CSS for the random exercises page: */
+div.random		{position:relative; display:inline-block; background-color:hsl(200,50%,85%);
+				background: -webkit-linear-gradient(-10deg, hsl(200,50%,75%),hsl(200,50%,95%)); /* For Safari 5.1 to 6.0 */
+			    background: -o-linear-gradient(-10deg, hsl(200,50%,75%),hsl(200,50%,95%)); /* For Opera 11.1 to 12.0 */
+			    background: -moz-linear-gradient(-10deg, hsl(200,50%,75%),hsl(200,50%,95%)); /* For Firefox 3.6 to 15 */
+			    background: linear-gradient(-10deg, hsl(200,50%,75%),hsl(200,50%,95%)); /* Standard syntax (must be last) */
+				border:2px white outset; padding:10px; margin:2px auto;
+				box-shadow:0 10px 15px -10px hsl(200,50%,10%);
+				box-shadow:0 10px 15px -10px hsla(200,50%,0%,0.7);
+				-moz-border-radius:10px 10px 2px 2px;
+				-webkit-border-radius:10px 10px 2px 2px;
+				border-radius:10px 10px 2px 2px;
+				}
+div.random:hover {box-shadow:0 3px 7px -2px hsl(200,50%,10%);
+				box-shadow:0 3px 7px -2px hsla(200,50%,0%,0.6);
+				background: -webkit-linear-gradient(170deg, hsl(200,50%,75%),hsl(200,50%,95%)); /* For Safari 5.1 to 6.0 */
+			    background: -o-linear-gradient(170deg, hsl(200,50%,75%),hsl(200,50%,95%)); /* For Opera 11.1 to 12.0 */
+			    background: -moz-linear-gradient(170deg, hsl(200,50%,75%),hsl(200,50%,95%)); /* For Firefox 3.6 to 15 */
+			    background: linear-gradient(170deg, hsl(200,50%,75%),hsl(200,50%,95%)); /* Standard syntax (must be last) */
+}
+div.random p 	{margin:0;padding:0; text-shadow:0px 2px 2px hsl(200,50%,50%);text-shadow:0px 2px 2px hsla(200,50%,20%,0.3);}
+div.random a	{text-decoration:none; color:white;}
+div.random a:hover	{text-shadow:0px 3px 4px hsl(200,50%,50%);text-shadow:0px 3px 4px hsla(200,50%,20%,0.5);}
+
+div.special		{background-color:hsl(200,50%,70%); 
+				background: -webkit-linear-gradient(-10deg, hsl(200,50%,50%),hsl(200,50%,95%)); /* For Safari 5.1 to 6.0 */
+			    background: -o-linear-gradient(-10deg, hsl(200,50%,50%),hsl(200,50%,95%)); /* For Opera 11.1 to 12.0 */
+			    background: -moz-linear-gradient(-10deg, hsl(200,50%,50%),hsl(200,50%,95%)); /* For Firefox 3.6 to 15 */
+			    background: linear-gradient(-10deg, hsl(200,50%,50%),hsl(200,50%,95%)); /* Standard syntax (must be last) */
+}
+div.special:hover {box-shadow:0 3px 7px -2px hsl(200,50%,10%);
+				box-shadow:0 3px 7px -2px hsla(200,50%,0%,0.6);
+				background: -webkit-linear-gradient(170deg, hsl(200,50%,50%),hsl(200,50%,95%)); /* For Safari 5.1 to 6.0 */
+			    background: -o-linear-gradient(170deg, hsl(200,50%,50%),hsl(200,50%,95%)); /* For Opera 11.1 to 12.0 */
+			    background: -moz-linear-gradient(170deg, hsl(200,50%,50%),hsl(200,50%,95%)); /* For Firefox 3.6 to 15 */
+			    background: linear-gradient(170deg, hsl(200,50%,50%),hsl(200,50%,95%)); /* Standard syntax (must be last) */
+}
+
+div.special	a	{color:hsl(200,90%,20%);}
+				

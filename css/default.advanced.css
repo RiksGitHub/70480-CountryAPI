@@ -1,0 +1,71 @@
+@charset "UTF-8";
+
+/** 
+ * Default Advanced CSS Drop-Down Menu Theme
+ *
+ * @file		default.advanced.css
+ * @name		Default
+ * @version		0.1
+ * @type		transitional
+ * @browsers	Windows: IE7+, Opera9+, Firefox3+
+ *				Mac OS: Safari2+, Firefox3+
+ *
+ * @link		http://www.lwis.net/free-css-drop-down-menu
+ * @copyright	2009-2012 Live Web Initiatives, http://www.lwis.net
+ *
+ */
+
+@import "default.css";
+
+/* -- Base style extension -- */
+ul.dropdown {
+ z-index:2000;
+}
+
+ul.dropdown li a {
+ display: block;
+ padding: 0 10px;
+}
+
+
+/* -- Base style override -- */
+
+ul.dropdown li {
+ padding: 0;
+}
+
+
+/* -- Base style reinitiate: post-override activities -- */
+
+ul.dropdown li.dir {
+ padding: 0 30px 0 10px;
+}
+
+	ul.dropdown ul li.dir {
+	 margin:0 0 10px 5px;
+	 padding: 10px 8px 10px 8px;
+	}
+
+/* -- Custom styles -- */
+
+ul.dropdown ul {
+ /* padding: 10px 0;/* This padding can make the dropdown wider than 100%*/
+}
+
+ul.dropdown ul a {
+ width: 140px;
+ padding: 3px 5px;
+ background: url('../img/pattern2.png') 0 0 repeat-x;
+}
+
+ul.dropdown ul a:hover {
+ /*background-color: hsla(200,60%,30%,1); /**/
+ background:linear-gradient(0deg, hsl(200,20%,75%),hsl(200,20%,80%)); /* Main color selecting element*/
+ text-shadow:1px 1px 1px hsl(200,100%,10%);
+ color: hsl(300,0%,100%);
+}
+
+ul.dropdown ul ul {
+ padding: 0;
+ /*margin-left: -5px; /**/
+}
