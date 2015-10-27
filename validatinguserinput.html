@@ -23,48 +23,15 @@
 		<!-- CSS for the page styling -->
 		<link rel="stylesheet" href="css/style.css" />
 		<link rel="stylesheet" href="css/responsive.css" />
-		<style>
-
-			/* Transforming the title: */
-			#title { 
-				text-shadow:1px 1px 1px hsl(200,50%,20%);
-				-webkit-animation: myTransformation 3.5s cubic-bezier(.9,-0.2,.8,.25) 0s, myShadow 6s ease-out 3s infinite alternate;/* 0s infinite alternate; /* Chrome, Safari, Opera */
-	    		animation: myTransformation 3.5s cubic-bezier(.9,-0.2,.8,.25) 0s, myShadow 6s ease-out 3s infinite alternate;/* infinite alternate;
-	    		/* This should stop it at the end of the animation (use fillmode AFTER animation): /**/
-	    		-webkit-animation-fill-mode: forwards;
-				animation-fill-mode: forwards;/**/
-				}
-			
-			/* Code for Chrome, Safari and Opera */
-			@-webkit-keyframes myTransformation {
-			    0% 		{transform:rotate(0deg) translateX(150px) translateY(35px) scale(.4);}
-			    100% 	{transform:rotate(-2deg) translateX(-5px) translateY(10px) scale(1);}
-			}
-			/* Standard syntax */
-			@keyframes myTransformation {
-			    from 	{transform:rotate(0deg) translateX(150px) translateY(35px) scale(.4);}
-			    to 		{transform:rotate(-2deg) translateX(-5px) translateY(10px) scale(1);}
-			}
-			/* Code for Chrome, Safari and Opera */
-			@-webkit-keyframes myShadow {
-			    0% 		{text-shadow:1px 1px 1px hsl(200,50%,20%);}
-			    15% 	{text-shadow:1px 1px 1px hsl(200,50%,20%);}
-			    40% 	{text-shadow:5px 3px 6px hsl(200,50%,20%);}
-			    100% 	{text-shadow:-3px 5px 9px hsl(200,50%,20%);}
-			}
-			/* Standard syntax */
-			@keyframes myShadow {
-			    0% 		{text-shadow:1px 1px 1px hsl(200,50%,20%);}
-			    15% 	{text-shadow:1px 1px 1px hsl(200,50%,20%);}
-			    40% 	{text-shadow:5px 3px 6px hsl(200,50%,20%);}
-			    100% 	{text-shadow:-3px 5px 9px hsl(200,50%,20%);}
-			}
-		</style>
+		
+		<!-- CSS for the title animation -->
+		<link rel="stylesheet" href="css/title.css" />
+		
 		<script src="js/jquery-1.11.3.min.js">
 		</script>
 		<!-- #BeginEditable "TopScripts" -->
 		
-			
+		
 		<!--script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 		<script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.2.4"></script-->
 		
