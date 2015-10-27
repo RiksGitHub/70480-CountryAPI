@@ -10,6 +10,9 @@
 	#footer 		{width:100%; }
 	#footer p		{font-size:12px; padding-top:4px;}
 	h1#title		{font-size:32px; max-width:80%; margin-top:-3em;}
+	.big-nav		{display:none;}
+	.mobile-nav		{display:block;}
+	.responsive-menu{width:100%;} /* Same width as wrapper */
 }
 
 @media screen and (max-width: 799px) and (min-width: 600px){
@@ -23,6 +26,9 @@
 	#footer 		{width:85%;}
 	#footer p		{font-size:13px; padding-top:3px;}
 	h1#title		{font-size:32px;max-width:90%;}
+	.big-nav		{display:block;}
+	.mobile-nav		{display:none;}
+	.responsive-menu{width:85%;} /* Same width as wrapper */
 }
 
 @media screen and (max-width: 1199px) and (min-width: 800px){
@@ -36,6 +42,9 @@
 	#footer 		{width:800px;}
 	#footer p		{font-size:14px; padding-top:2px;}
 	h1#title		{font-size:50px;max-width:90%;}
+	.big-nav		{display:block;}
+	.mobile-nav		{display:none;}
+	.responsive-menu{width:800px;} /* Same width as wrapper */
 }
 
 @media screen and (min-width: 1200px) {
@@ -49,4 +58,7 @@
 	#footer 		{width:960px;}
 	#footer p		{font-size:15px; padding-top:1px;}
 	h1#title		{font-size:63px; max-width:90%;}
+	.big-nav		{display:block;}
+	.mobile-nav		{display:none;}
+	.responsive-menu{width:960px;} /* Same width as wrapper */
 }

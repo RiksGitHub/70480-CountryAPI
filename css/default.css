@@ -31,17 +31,16 @@ ul.dropdown {
 
 	ul.dropdown li {
 	 background-color: transparent;
-	 color: #468;
+	 color: #468;/**/
 	 border-left:1px hsl(200,35%,85%) solid;
 	}
 	ul.dropdown li li{
-	 color: #028;
+	 color: #028;/**/
 	 border-left:1px hsl(200,35%,85%) solid;/**/
 	 border-bottom:1px hsl(200,35%,85%) solid;/**/
 	 text-shadow:none;
 	}
 
-		
 	ul.dropdown li.hover,
 	ul.dropdown li:hover {
 	 background-color: hsl(200,35%,85%);/*background-color: hsla(200,50%,60%,.3); /* Main color surrounding submenu on mouseover */
@@ -55,12 +54,6 @@ ul.dropdown {
 	ul.dropdown>li:hover {
 	 background-color: hsl(200,35%,80%);
 	 border-bottom:none;
-	}
-	
-	ul.dropdown li li.hover li,
-	ul.dropdown li li:hover li{
-		/*background-color:hsl(200,20%,80%); /* Main color inside surrounding submenu on mouseover */
-		border:none;
 	}
 	
 	ul.dropdown a:link,
@@ -78,7 +71,7 @@ ul.dropdown {
 	 background:linear-gradient(179.8deg, hsl(200,35%,80%) 25%, hsl(200,30%,85%) 70%, hsl(200,20%,90%)) ;/**/
 	 font-size: 12px;
 	 letter-spacing: normal;
-	 box-shadow:0 5px 8px 0px hsl(200,10%,30%);
+	 box-shadow:0 5px 8px -4px hsl(200,10%,30%);/**/
 	}
 
 		ul.dropdown ul li {
@@ -94,12 +87,11 @@ ul.dropdown {
 		 background:transparent;
 		 margin-top: 5px;
 		 text-transform: none;
-	 	 box-shadow:0 2px 8px -3px hsl(200,10%,30%);
+	 	 box-shadow:0 2px 8px -3px hsl(200,10%,30%);/**/
 		}
 
 			ul.dropdown ul ul li {
 			 font-weight: normal;
-			 border:none;
 			}
 
 

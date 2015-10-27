@@ -9,25 +9,33 @@ h1,h2			{font-family:Helvetica, "Times New Roman", Times, serif;/**/
 				text-shadow: 1px 1px 1px hsla(200,40%,10%,0.9);
 				margin-top:10px;
 				}
-h1				{margin:10px; font-size:large; color:hsl(200,20%,98%);}
+				
+h1				{display:inline-block;position:relative; margin:5px auto 20px auto; clear:both;
+				font-size:large; color:hsl(200,20%,98%);
+				background: -webkit-linear-gradient(356.5deg, hsla(200,30%,50%,0.5) 5%, hsla(200,50%,90%,0.5) 35%, hsla(200,0%,100%,0.0) 95%); /* For Safari 5.1 to 6.0 */
+			    background: -o-linear-gradient(356.5deg, hsla(200,30%,50%,0.5) 5%, hsla(200,50%,90%,0.5) 35%, hsla(200,0%,100%,0.0) 95%); /* For Opera 11.1 to 12.0 */
+			    background: -moz-linear-gradient(356.5deg, hsla(200,30%,50%,0.5) 5%, hsla(200,50%,90%,0.5) 35%, hsla(200,0%,100%,0.0) 95%); /* For Firefox 3.6 to 15 */
+			    background: linear-gradient(356.5deg, hsla(200,30%,50%,0.5) 5%, hsla(200,50%,90%,0.5) 35%, hsla(200,0%,100%,0.0) 95%); /* Standard syntax (must be last) */
+				box-shadow: 0 10px 12px -10px hsl(200,100%,10%);
+				box-shadow: 0 10px 12px -10px hsla(200,100%,10%,0.8);
+				-moz-border-radius: 0px 0px 20px 20px/0px 0px 20px 8px;
+				-webkit-border-radius:0px 0px 20px 20px/0px 0px 20px 8px;
+				border-radius:0px 0px 20px 20px/0px 0px 20px 8px;
+				border-bottom:1.5px hsl(200,30%,25%) solid;
+				padding:15px 45px 4px 25px; /**/
+				}
 h2				{margin:10px; font-size:medium;}
 
 nav				{}
 				
 figure			{padding:0; padding-top:10px;margin:0;
-				/*background-color:rgb(255,255,255); background-color:rgba(255,255,255,0.5); /**/
 				}
+				
 figcaption		{padding:10px 0;}
 
 #wrapper 		{position:relative; margin:0px auto; 
 				height:auto; min-height:100%; /**/
 				background: url('../img/paper3.png'); /**/
-				/*overflow:hidden; /* hidden makes the box wrap the content, thus filling it with the background color (careful with menu items)*/
-
-				/*height: expression( this.scrollHeight = "100%" ); /* sets min-height for IE */
-				/* The following makes the box wrap the content (useful for background color but careful with menu items)
-				/* the problem is that it also makes IE go bonkers with the 100% height that is no longer 100% as soon as you hover over the nav if it's 100+% wide*/
-				/*overflow:hidden;/**/
 				text-align:center;
 				box-shadow:0px 3px 7px 0px black;}
 
@@ -39,12 +47,11 @@ figcaption		{padding:10px 0;}
 				box-shadow: 0 -70px 150px -10px hsl(30,100%,10%);
 				box-shadow: 0 -70px 150px -10px hsla(30,100%,10%,0.9);
 				}
-#titlebar h1	{color:white;}
+#titlebar h1	{display:block; color:white; background:none; box-shadow:none; padding:0; border:none;}
 
 #contentwrapper	{position:relative; overflow:hidden; height:auto;
 				width:100%; 
 				margin:0; padding:15px 0 25px 0; /* For height of footer */
-				/* background-color:hsla(200,100%,0%,0.2); /**/
 				}
 
 #selectionfield	{display:block;float:left;width:30%; 
@@ -70,11 +77,13 @@ figcaption		{padding:10px 0;}
 				box-shadow: 0 20px 20px -20px hsl(200,40%,10%); margin-bottom:10px;
 				padding:0px 10px 15px 10px;  
 				}
-#mapdiv1 h1		{color:hsl(200,60%,60%);
+#mapdiv1 h1		{color:hsl(200,50%,80%); 
+				background:none;box-shadow:none; margin:10px; margin-top:0px;
 				text-shadow:1px 1px hsl(200,50%,20%);
-				font: bold 15px/normal Arial, Helvetica, sans-serif;
- 				letter-spacing: 2px;
- 				text-transform: uppercase;
+				font: normal 20px/normal Arial, Helvetica, sans-serif;
+ 				letter-spacing:2px;
+ 				text-transform:uppercase;
+ 				border:none;
 				}
 #mapdiv2 		{display:inline-block; border:2pt white inset; margin:0; width:95%;
 				}
@@ -112,7 +121,6 @@ button			{padding:5px; margin-top:5px;}
 table			{margin:0 auto; border-spacing: 0; text-align:left; border:1.5px white outset; padding:10px; 
 				box-shadow: 0 20px 20px -20px hsl(200,40%,10%); margin-bottom:10px; background-color:hsl(200,20%,90%);}
 table td		{margin:0; padding:5px;
-				/*border:1pt black solid;/**/
 				}
 				
 #selectionfield table {width:90%; max-width:330px; padding:10px;}
@@ -121,21 +129,25 @@ table td		{margin:0; padding:5px;
 .inputwidth 	{width:100%; font-family: Verdana;  font-size: .8em; }
 
 #scalable		{cursor:pointer;}
+
 /* Some CSS for the random exercises page: */
 div.random		{position:relative; display:inline-block; background-color:hsl(200,50%,85%);
 				background: -webkit-linear-gradient(-10deg, hsl(200,50%,75%),hsl(200,50%,95%)); /* For Safari 5.1 to 6.0 */
 			    background: -o-linear-gradient(-10deg, hsl(200,50%,75%),hsl(200,50%,95%)); /* For Opera 11.1 to 12.0 */
 			    background: -moz-linear-gradient(-10deg, hsl(200,50%,75%),hsl(200,50%,95%)); /* For Firefox 3.6 to 15 */
 			    background: linear-gradient(-10deg, hsl(200,50%,75%),hsl(200,50%,95%)); /* Standard syntax (must be last) */
-				border:2px white outset; padding:10px; margin:2px auto;
+				margin:2px auto;
 				box-shadow:0 10px 15px -10px hsl(200,50%,10%);
 				box-shadow:0 10px 15px -10px hsla(200,50%,0%,0.7);
-				-moz-border-radius:10px 10px 2px 2px;
-				-webkit-border-radius:10px 10px 2px 2px;
-				border-radius:10px 10px 2px 2px;
+				padding:15px 10px 3px 10px;
+				border-radius:10px ;
+				border-bottom:1px hsl(200,0%,50%) outset;
+				vertical-align:top;
 				}
 div.random:hover {box-shadow:0 3px 7px -2px hsl(200,50%,10%);
 				box-shadow:0 3px 7px -2px hsla(200,50%,0%,0.6);
+			    padding:9px 10px 9px 10px;
+				border:none; border-top:1px hsl(200,40%,65%) solid;border-top:1px hsla(200,60%,25%,0.2) solid;
 				background: -webkit-linear-gradient(170deg, hsl(200,50%,75%),hsl(200,50%,95%)); /* For Safari 5.1 to 6.0 */
 			    background: -o-linear-gradient(170deg, hsl(200,50%,75%),hsl(200,50%,95%)); /* For Opera 11.1 to 12.0 */
 			    background: -moz-linear-gradient(170deg, hsl(200,50%,75%),hsl(200,50%,95%)); /* For Firefox 3.6 to 15 */
@@ -160,4 +172,3 @@ div.special:hover {box-shadow:0 3px 7px -2px hsl(200,50%,10%);
 }
 
 div.special	a	{color:hsl(200,90%,20%);}
-				

@@ -1,0 +1,122 @@
+﻿.mobile-nav { /*padding:5px; background:white;/* temp /**/ }
+
+.menu-btn {position:absolute; right:0%; z-index:50;
+	width:40px; height:43px;
+	cursor:pointer;
+	border-radius:20px 20px 5px 5px/10px 10px 5px 5px; 
+	border:2px hsl(25,20%,95%) outset; border-bottom:1px solid hsl(25,20%,45%); border-top:1px solid hsl(25,90%,15%);
+	background-color:hsl(40,90%,50%);
+	background:-webkit-linear-gradient(hsl(40,90%,18%) 4%, hsl(40,90%,30%) 20%, hsl(25,40%,85%) 50%, hsl(40,60%,60%) 95%) ;/**/
+	background:-o-linear-gradient(hsl(40,90%,18%) 4%, hsl(40,90%,30%) 20%, hsl(25,40%,85%) 50%, hsl(40,60%,60%) 95%) ;/**/
+	background:-moz-linear-gradient(hsl(40,90%,18%) 4%, hsl(40,90%,30%) 20%, hsl(25,40%,85%) 50%, hsl(40,60%,60%) 95%) ;/**/
+	background:linear-gradient(hsl(40,90%,18%) 4%, hsl(40,90%,30%) 20%, hsl(25,40%,85%) 50%, hsl(40,60%,60%) 95%) ;/**/
+	box-shadow:0px 5px 8px -2px hsl(200,50%,20%);
+	margin:8px;
+	}/**/
+
+.close-btn { 
+	position:absolute; right:0%; margin:5px;
+	z-index:50; cursor:pointer;
+	border:1px hsl(200,20%,95%) outset; border-radius:15px; border-bottom:1px solid white; border-top:1px solid white;/**/
+	box-shadow:1px 1px 1px 0px hsl(200,50%,20%);
+	}/**/
+
+.menu-btn span:first-of-type{margin-top:16px;}
+.menu-btn span {
+	display:block; width:125%; height:3px; /**/
+	background:green;
+	margin:0 -5px 3px -5px;
+	border-radius:4px / 2px; 
+	box-shadow:0px 1px 1px 0px hsl(0,80%,20%);
+	z-index: 99;
+	}
+ 
+ .menu-btn p {
+ 	margin-top:-4px; padding:0;
+	color:white; font-size:xx-small;
+	text-shadow:1px 1px 1px hsl(200,50%,20%);
+	}
+	
+ .close-btn p {
+	position:relative; display:inline-block; text-align:center;
+	width:25px; height:20px;
+ 	margin:0; padding:0; padding-top:7px;
+	color:white; font-size:xx-small;
+	text-shadow:1px 1px 1px hsl(200,50%,20%);
+	}
+
+.responsive-menu {
+	position:fixed;
+	z-index:1;
+	display:none; /**/
+	}
+	
+.responsive-menu ul{
+	cursor:default; /* So it's still an arrow when hovering text */
+	list-style:none;
+	}
+	
+.responsive-menu ul li a{
+	text-decoration:none;
+	}
+
+.expand {
+	display:block !important; 
+	} /**/
+	
+.btn-none {
+	display:none !important; 
+	} /**/
+
+ul.mobiledropdown {
+	width:100%; margin-bottom:0px;
+	font:normal Helvetica, sans-serif; letter-spacing:normal; text-transform:uppercase;/**/
+	border-bottom:1px solid white; border-top:1px solid white;
+	background:-webkit-linear-gradient(179.8deg, hsl(200,35%,80%) 25%, hsl(200,30%,85%) 70%, hsl(200,20%,90%)) ;/**/
+	background:-o-linear-gradient(179.8deg, hsl(200,35%,80%) 25%, hsl(200,30%,85%) 70%, hsl(200,20%,90%)) ;/**/
+	background:-moz-linear-gradient(179.8deg, hsl(200,35%,80%) 25%, hsl(200,30%,85%) 70%, hsl(200,20%,90%)) ;/**/
+	background:linear-gradient(179.8deg, hsl(200,35%,80%) 25%, hsl(200,30%,85%) 70%, hsl(200,20%,90%)) ;/**/
+	box-shadow:0 5px 8px 0px hsl(200,10%,30%);
+	}
+
+ul.mobiledropdown li {
+	width:160px; margin:0 auto 0px auto; padding:8px 10px;
+	color: #028; background-color: transparent;
+	font-weight:bold;
+	}
+	
+ul.mobiledropdown li ul{
+	margin-top: 5px; padding:0px;
+	text-transform:none; color:#028; text-shadow:none;/**/
+	border-bottom:1px hsl(200,35%,85%) solid;/**/
+	background:transparent;
+	box-shadow:0 2px 8px -3px hsl(200,10%,30%);/**/
+	}
+	 
+ul.mobiledropdown li li{
+	 width:auto; padding:0; margin:0;
+	 font-weight:normal;
+	 }
+
+ul.mobiledropdown li.hover,
+ul.mobiledropdown li:hover {
+	 background-color: hsl(200,35%,85%); /**/
+	 color:#fff; text-shadow:1px 1px 1px hsl(200,50%,20%);
+	 box-shadow:0 5px 8px 0px hsl(200,10%,30%);
+	}
+	
+ul.mobiledropdown li li.hover,
+ul.mobiledropdown li li:hover {
+	background:linear-gradient(0deg, hsl(200,20%,75%),hsl(200,20%,80%)); /**/
+	box-shadow:0 5px 8px -4px hsl(200,10%,30%);
+	}
+	
+ul.mobiledropdown a {
+	display:block; padding:3px 5px; width:auto;
+	}
+	
+/*ul.mobiledropdown a:link,
+ul.mobiledropdown a:visited	{ color: #000; }/**/
+ul.mobiledropdown a:hover	{ color: #fff; }
+ul.mobiledropdown a:active	{ color: #ffa500; }
+
