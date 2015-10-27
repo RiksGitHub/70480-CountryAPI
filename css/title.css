@@ -1,5 +1,4 @@
-﻿
-/* Transforming the title: */
+﻿/* Transforming the title: */
 #title { 
 	text-shadow:1px 1px 1px hsl(200,50%,20%);
 	-webkit-animation: myTransformation 3.5s cubic-bezier(.9,-0.2,.8,.25) 0s, myShadow 6s ease-out 3s infinite alternate;/* 0s infinite alternate; /* Chrome, Safari, Opera */
@@ -33,4 +32,3 @@
     40% 	{text-shadow:5px 3px 6px hsl(200,50%,20%);}
     100% 	{text-shadow:-3px 5px 9px hsl(200,50%,20%);}
 }
-
