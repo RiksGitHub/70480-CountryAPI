@@ -31,12 +31,25 @@
 		</script>
 		<!-- #BeginEditable "TopScripts" -->
 		
-		
-		
-		<!--script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-		<script type="text/javascript"></script-->
-		
-		
+		<style>
+			div#info {
+				position:relative;
+				display:block;
+				margin:2px auto 20px auto;
+				height:150px; width:80%; max-width:400px;
+				background-color:hsl(200,50%,85%);
+				background: -webkit-linear-gradient(-10deg, hsl(200,50%,75%),hsl(200,50%,95%)); 
+			    background: -o-linear-gradient(-10deg, hsl(200,50%,75%),hsl(200,50%,95%)); 
+			    background: -moz-linear-gradient(-10deg, hsl(200,50%,75%),hsl(200,50%,95%)); 
+			    background: linear-gradient(-10deg, hsl(200,50%,75%),hsl(200,50%,95%)); 
+				box-shadow:0 10px 15px -10px hsl(200,50%,10%);
+				box-shadow:0 10px 15px -10px hsla(200,50%,0%,0.7);
+				padding:15px 10px 3px 10px;
+				border-radius:10px ;
+				border-bottom:1px hsl(200,0%,50%) outset;
+				}
+			div#info h1{background:none;border:none;margin:0;padding:0;box-shadow:none;}
+		</style>
 		
 		<!-- #EndEditable -->
 	
@@ -159,11 +172,14 @@
 			
 				<header> 
 					<hgroup>
-						<h1>Some random exercises I did on the side</h1>
+						<h1>Exercises I did on the side</h1>
 					</hgroup>
 				</header>
 				<div id="content" style="width:100%;">
 					<br />
+					<div id="info">
+						<p id ="infoP">test</p>
+					</div>
 					<div class="random">
 						<p><a href="eventlistening.html">Event Listening</a></p>
 					</div>
@@ -245,29 +261,7 @@
 		
 		<!-- #BeginEditable "BottomScripts" -->
 		
-		<script type="text/javascript">
-			function RandomChoice(){
-				var Pietje = ["eventlistening", "positioning", "rangefocus", "showinghiding", "transforms", "dragdrop", "regularexpression", 
-				"validatinguserinput", "svg", "webstorage", "video", "canvas", "websocket", "bouncingball", "looseends"];
-				// Random number 0 to X : Math.round((X+1)*Math.random()-0.5). (In theory this might result in -1 or X+1, but what are the odds :)
-				var b = Math.round(Pietje.length*Math.random()-0.5);
-				if(confirm('Now opening \''+Pietje[b]+'.html\'\n(Does not work in Internet Explorer)')){
-					openNewURLInTheSameWindow(Pietje[b]+'.html')
-				};
-			}
-			// This function will setup a virtual anchor element and fire click handler to open new URL in the same room
-			// (works better with popup blockers than location.href=something or location.reload()):
-			function openNewURLInTheSameWindow(targetURL) {
-			    var a = document.createElement('a');
-			    a.href = targetURL;
-			    fireClickEvent(a);
-			}
-			// this function can fire onclick handler for any DOM-Element:
-			function fireClickEvent(x) {
-			    var evt = new window.MouseEvent('click', {view: window, bubbles: true, cancelable: true});
-			    x.dispatchEvent(evt);
-			}
-		</script>
+		<script src="js/Rik_RandomizeDescriptions.js"></script>
 		
 		<!-- #EndEditable -->
 	</body>
