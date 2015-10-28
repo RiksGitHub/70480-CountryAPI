@@ -85,7 +85,7 @@ ul.mobiledropdown li {
 	font-weight:bold;
 	}
 	
-ul.mobiledropdown li ul{
+ul.mobiledropdown li ul {
 	margin-top: 5px; padding:0px;
 	text-transform:none; color:#028; text-shadow:none;/**/
 	border-bottom:1px hsl(200,35%,85%) solid;/**/
@@ -93,7 +93,7 @@ ul.mobiledropdown li ul{
 	box-shadow:0 2px 8px -3px hsl(200,10%,30%);/**/
 	}
 	 
-ul.mobiledropdown li li{
+ul.mobiledropdown li li {
 	 width:auto; padding:0; margin:0;
 	 font-weight:normal;
 	 }
@@ -115,7 +115,7 @@ ul.mobiledropdown a {
 	display:block; padding:3px 5px; width:auto;
 	}
 	
-/*ul.mobiledropdown a:link,
+ul.mobiledropdown a:link,
 ul.mobiledropdown a:visited	{ color: #000; }/**/
 ul.mobiledropdown a:hover	{ color: #fff; }
 ul.mobiledropdown a:active	{ color: #ffa500; }

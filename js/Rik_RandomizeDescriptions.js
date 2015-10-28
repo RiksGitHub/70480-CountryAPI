@@ -1,25 +1,57 @@
 ﻿window.onload = function () {
 	
-	var defaultDescription = "See below a collection of exercises I practiced with"
+	var defaultDescription = "";//See below a collection of exercises I practiced with"
 	$("#infoP").html(defaultDescription);
 	
 	var descriptions = [
-		"<h1>Event Listening</h1><p>A simple visualization of events being captured and how they bubble.</p>",
-		"<h1>Positioning</h1><p>Positioning html elements either absolutely or relatively.</p>",
-		"<h1>Range, Focus</h1><p>Using a slider (html 'range' element) with some regular expression testing in combination with a focus event handler.</p>",
-		"<h1>Show, Hide</h1><p>Showing and hiding an html element with javascript.</p>",
-		"<h1>Transformations</h1><p>Remnant of CSS some transformation tests.</p>",
-		"<h1>Dragging/Dropping</h1><p>Small exercise programming drag-drop behavior in Javascript.</p>",
-		"<h1>Regular Expressions</h1><p>Using regular expression test to evaluate an input value.</p>",
-		"<h1>Validating User Input</h1><p>Simple form with some standard html input fields.</p>",
-		"<h1>SVG</h1><p>Small example of drawing with scalable vector graphics.</p>",
-		"<h1>Web Storage</h1><p>Visualization of using 'Local Storage' to store small amounts of data on the client side.</p>",
-		"<h1>Video file</h1><p>Unfinished html video example with custom video controls (w.i.p.)</p>",
-		"<h1>Canvas</h1><p>Small example using the html 'Canvas' element in combination with Javascript to create a drawing.</p>",
-		"<h1>Websocket Chat Pane</h1><p>Example using websocket functionality. (It would require to be set up on the server side aswell, before it would work. So it is not a working example).</p>",
-		"<h1>Bouncing ball</h1><p>Drawing a bouncing ball animation on Canvas using Javascript and then using this animation to demontrate the use of a 'Web Worker', that can do work (a calculation) in the background.</p>",
-		"<h1>Loose ends</h1><p>Just some more unsorted random stuff</p>",
-		"<h1>Select randomly</h1><p>Let the computer select one randomly.<br/>This doesn't yet work in internet Explorer, IE doesn't recognize the dispatchEvent(evt) that was used (work around w.i.p.)."
+		{title:"Event Listening",
+		description:"A simple visualization of events being captured and how they bubble.",
+		pictureUrl:"img/randomize/01.png"},
+		{title:"Positioning",
+		description:"Positioning html elements either absolutely or relatively.",
+		pictureUrl:"img/randomize/02.png"},
+		{title:"Range, Focus",
+		description:"Using a slider (html 'range' element) with some regular expression testing in combination with a focus event handler.",
+		pictureUrl:"img/randomize/03.png"},
+		{title:"Show, Hide",
+		description:"Showing and hiding an html element with javascript.",
+		pictureUrl:"img/randomize/04.png"},
+		{title:"Transformations",
+		description:"Remnant of CSS some transformation tests.",
+		pictureUrl:"img/randomize/05.png"},
+		{title:"Dragging/Dropping",
+		description:"Small exercise programming drag-drop behavior in Javascript.",
+		pictureUrl:"img/randomize/06.png"},
+		{title:"Regular Expressions",
+		description:"Using regular expression test to evaluate an input value.",
+		pictureUrl:"img/randomize/07.png"},
+		{title:"Validating User Input",
+		description:"Simple form with some standard html input fields.",
+		pictureUrl:"img/randomize/08.png"},
+		{title:"SVG",
+		description:"Small example of drawing with scalable vector graphics.",
+		pictureUrl:"img/randomize/09.png"},
+		{title:"Web Storage",
+		description:"Visualization of using 'Local Storage' to store small amounts of data on the client side.",
+		pictureUrl:"img/randomize/10.png"},
+		{title:"Video file",
+		description:"Unfinished html video example with custom video controls (w.i.p.)",
+		pictureUrl:"img/randomize/11.png"},
+		{title:"Canvas",
+		description:"Small example using the html 'Canvas' element in combination with Javascript to create a drawing.",
+		pictureUrl:"img/randomize/12.png"},
+		{title:"Websocket Chat Pane",
+		description:"Example using websocket functionality. (It would require to be set up on the server side aswell, before it would work. So it is not a working example).",
+		pictureUrl:"img/randomize/13.png"},
+		{title:"Bouncing ball",
+		description:"Drawing a bouncing ball animation on Canvas using Javascript and then using this animation to demontrate the use of a 'Web Worker', that can do work (a calculation) in the background.",
+		pictureUrl:"img/randomize/14.png"},
+		{title:"Loose ends",
+		description:"Just some more unsorted random stuff",
+		pictureUrl:"img/randomize/15.png"},
+		{title:"Select randomly",
+		description:"Let the computer select one randomly.<br/>This doesn't yet work in internet Explorer, IE doesn't recognize the dispatchEvent(evt) that was used (work-around to be implemented at some point).",
+		pictureUrl:"img/randomize/16.png"},
 	];
 
     var descriptionObject = {};
@@ -54,12 +86,33 @@
 	
 	function changeDescription() {
 		// Use the id of current div to look up and display the description in the description object:
-		$("#infoP").html(descriptionObject[this.id]);
+		$("#infoP").html(
+			"<h1>"+descriptionObject[this.id].title+"</h1>"+
+			'<br /><img src="'+descriptionObject[this.id].pictureUrl+'"/>'+
+			"<p>"+descriptionObject[this.id].description+"</p>"
+		);
 	};
 	
 	function clearDescription() {
 		$("#infoP").html(defaultDescription);
 	};
+	
+	//To light up the fact that it doesn't yet work in IE
+	// (when this is removed, don't forget to remove the notice id and class in the html):
+	$(".notice").hover(
+		NoticeColor,
+	    clearNoticeColor
+	);
+	
+	function NoticeColor() {
+		// Use the id of current div to look up and display the description in the description object:
+		$("#notice").css("background-color", "hsl(20,80%,70%)");
+	};
+	
+	function clearNoticeColor() {
+		$("#notice").css("background-color", "transparent");
+	};
+
 }
 
 //===================================================================================================================================================

@@ -32,11 +32,8 @@
 		<!-- #BeginEditable "TopScripts" -->
 		
 		<style>
-			div#info {
-				position:relative;
-				display:block;
-				margin:2px auto 20px auto;
-				height:150px; width:80%; max-width:400px;
+			div#info {position:relative; display:block; height:220px; width:80%; max-width:400px;
+				margin:2px auto 20px auto; text-align:center;
 				background-color:hsl(200,50%,85%);
 				background: -webkit-linear-gradient(-10deg, hsl(200,50%,75%),hsl(200,50%,95%)); 
 			    background: -o-linear-gradient(-10deg, hsl(200,50%,75%),hsl(200,50%,95%)); 
@@ -44,11 +41,13 @@
 			    background: linear-gradient(-10deg, hsl(200,50%,75%),hsl(200,50%,95%)); 
 				box-shadow:0 10px 15px -10px hsl(200,50%,10%);
 				box-shadow:0 10px 15px -10px hsla(200,50%,0%,0.7);
-				padding:15px 10px 3px 10px;
-				border-radius:10px ;
+				padding:10px 10px 3px 10px;
+				border-radius:5px ;
 				border-bottom:1px hsl(200,0%,50%) outset;
 				}
 			div#info h1{background:none;border:none;margin:0;padding:0;box-shadow:none;}
+			div#info p {background:none;border:none;margin:0;padding:0;box-shadow:none;}
+			div#info img{display:inline-block; margin:10px 5px 10px 0px; height:100px;}
 		</style>
 		
 		<!-- #EndEditable -->
@@ -178,60 +177,78 @@
 				<div id="content" style="width:100%;">
 					<br />
 					<div id="info">
-						<p id ="infoP">test</p>
+						<p id ="infoP"> </p>
 					</div>
-					<div class="random">
-						<p><a href="eventlistening.html">Event Listening</a></p>
-					</div>
-					<div class="random">
-						<p><a href="positioning.html">Positioning</a></p>
-					</div>
-					<div class="random special">
-						<p><a href="rangefocus.html">Range, focus</a></p>
-					</div>
-					<div class="random">
-						<p><a href="showinghiding.html">Show, hide</a></p>
-					</div>
-					<div class="random">
-						<p><a href="transforms.html">Transformations</a></p>
-					</div>
-					<div class="random special">
-						<p><a href="dragdrop.html">Drag drop</a></p>
-					</div>
-					<div class="random">
-						<p><a href="regularexpression.html" >Regular Expressions</a></p>
-					</div>
-					<div class="random">
-						<p><a href="validatinguserinput.html" >Validating User Input</a></p>
-					</div>
-					<div class="random">
-						<p><a href="svg.html" >SVG</a></p>
-					</div>
-					<div class="random special">
-						<p><a href="webstorage.html">Web storage</a></p>
-					</div>
-					<div class="random">
-						<p><a href="video.html">Video file</a></p>
-					</div>
-					<div class="random">
-						<p><a href="canvas.html">Canvas</a></p>
-					</div>
-					<div class="random">
-						<p><a href="websocket.html">Websocket chat pane</a></p>
-					</div>
-					<div class="random special">
-						<p><a href="bouncingball.html">Bouncing Ball</a></p>
-					</div>
-					<div class="random">
-						<p><a href="looseends.html">Loose ends</a></p>
-					</div>
-					<br /><br />
 					<hr />
-					<p style="margin:0;padding:3px 0;">To do: dispatchEvent(evt) workaround for Internet Explorer</p>
+					<div style="padding:10px 10px;">
+						<div class="random">
+							<p><a href="eventlistening.html">Event Listening</a></p>
+							<div class="verticalAlign"></div>
+						</div>
+						<div class="random">
+							<p><a href="positioning.html">Positioning</a></p>
+							<div class="verticalAlign"></div>
+						</div>
+						<div class="random special">
+							<p><a href="rangefocus.html">Range, focus</a></p>
+							<div class="verticalAlign"></div>
+						</div>
+						<div class="random">
+							<p><a href="showinghiding.html">Show, hide</a></p>
+							<div class="verticalAlign"></div>
+						</div>
+						<div class="random">
+							<p><a href="transforms.html">Transformations</a></p>
+							<div class="verticalAlign"></div>
+						</div>
+						<div class="random special">
+							<p><a href="dragdrop.html">Drag drop</a></p>
+							<div class="verticalAlign"></div>
+						</div>
+						<div class="random">
+							<p><a href="regularexpression.html" >Regular Expressions</a></p>
+							<div class="verticalAlign"></div>
+						</div>
+						<div class="random">
+							<p><a href="validatinguserinput.html" >Validating User Input</a></p>
+							<div class="verticalAlign"></div>
+						</div>
+						<div class="random">
+							<p><a href="svg.html" >SVG</a></p>
+							<div class="verticalAlign"></div>
+						</div>
+						<div class="random special">
+							<p><a href="webstorage.html">Web storage</a></p>
+							<div class="verticalAlign"></div>
+						</div>
+						<div class="random">
+							<p><a href="video.html">Video file</a></p>
+							<div class="verticalAlign"></div>
+						</div>
+						<div class="random">
+							<p><a href="canvas.html">Canvas</a></p>
+							<div class="verticalAlign"></div>
+						</div>
+						<div class="random">
+							<p><a href="websocket.html">Websocket chat pane</a></p>
+							<div class="verticalAlign"></div>
+						</div>
+						<div class="random special">
+							<p><a href="bouncingball.html">Bouncing Ball</a></p>
+							<div class="verticalAlign"></div>
+						</div>
+						<div class="random">
+							<p><a href="looseends.html">Loose ends</a></p>
+							<div class="verticalAlign"></div>
+						</div>
+					</div>
+					<hr />
+					<p id="notice" style="margin:0;padding:3px 0;">To do: dispatchEvent(evt) workaround for Internet Explorer</p>
 					<hr />
 					<br />
-					<div class="random" onclick="RandomChoice()" style="cursor:pointer; width:100px; height:60px;">
+					<div class="random notice" onclick="RandomChoice()" style="cursor:pointer; width:100px; height:60px; color:white;">
 						<p>Click here to select one randomly</p>
+						<div class="verticalAlign"></div>
 					</div>
 				</div> <!-- Close #content -->
 		
