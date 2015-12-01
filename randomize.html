@@ -170,94 +170,110 @@
 					</li>
 				</ul>
 			</nav>
-			<div id="contentwrapper">
 		<!-- #BeginEditable "Content" -->
+			
+			<div id="contentwrapper">
 			
 				<header> 
 					<hgroup>
 						<h1>Exercises I did on the side</h1>
 					</hgroup>
 				</header>
-				<div id="content" style="width:100%;">
-					<br />
-					<div id="info">
-						<p id ="infoP"> </p>
-					</div>
-					<hr />
-					<div style="padding:10px 10px;">
-						<div class="random">
-							<p><a href="eventlistening.html">Event Listening</a></p>
-							<div class="verticalAlign"></div>
-						</div>
-						<div class="random">
-							<p><a href="positioning.html">Positioning</a></p>
-							<div class="verticalAlign"></div>
-						</div>
-						<div class="random special">
-							<p><a href="rangefocus.html">Range, focus</a></p>
-							<div class="verticalAlign"></div>
-						</div>
-						<div class="random">
-							<p><a href="showinghiding.html">Show, hide</a></p>
-							<div class="verticalAlign"></div>
-						</div>
-						<div class="random">
-							<p><a href="transforms.html">Transformations</a></p>
-							<div class="verticalAlign"></div>
-						</div>
-						<div class="random special">
-							<p><a href="dragdrop.html">Drag drop</a></p>
-							<div class="verticalAlign"></div>
-						</div>
-						<div class="random">
-							<p><a href="regularexpression.html" >Regular Expressions</a></p>
-							<div class="verticalAlign"></div>
-						</div>
-						<div class="random">
-							<p><a href="validatinguserinput.html" >Validating User Input</a></p>
-							<div class="verticalAlign"></div>
-						</div>
-						<div class="random">
-							<p><a href="svg.html" >SVG</a></p>
-							<div class="verticalAlign"></div>
-						</div>
-						<div class="random special">
-							<p><a href="webstorage.html">Web storage</a></p>
-							<div class="verticalAlign"></div>
-						</div>
-						<div class="random">
-							<p><a href="video.html">Video file</a></p>
-							<div class="verticalAlign"></div>
-						</div>
-						<div class="random">
-							<p><a href="canvas.html">Canvas</a></p>
-							<div class="verticalAlign"></div>
-						</div>
-						<div class="random">
-							<p><a href="websocket.html">Websocket chat pane</a></p>
-							<div class="verticalAlign"></div>
-						</div>
-						<div class="random special">
-							<p><a href="bouncingball.html">Bouncing Ball</a></p>
-							<div class="verticalAlign"></div>
-						</div>
-						<div class="random">
-							<p><a href="looseends.html">Loose ends</a></p>
-							<div class="verticalAlign"></div>
-						</div>
-					</div>
-					<hr />
-					<p id="notice" style="margin:0;padding:3px 0;">To do: dispatchEvent(evt) workaround for Internet Explorer</p>
-					<hr />
-					<br />
-					<div class="random notice" onclick="RandomChoice()" style="cursor:pointer; width:100px; height:60px; color:white;">
-						<p>Click here to select one randomly</p>
+				<!-- Classes: 'notice' for javascript, 'selector' for css-->
+				<div class="notice selector" onclick="RandomChoice()" style="cursor:pointer; width:250px; height:40px; color:white;">
+				    <p>Click here to select one randomly</p>
+				    <div class="verticalAlign"></div>
+				</div>
+				<br /><br />
+				<hr />
+				<div style="display:inline-block; height:80px; margin:6px 0; width:40%; min-width:300px; ">
+				    <p id="notice">To do: <br />dispatchEvent(evt) workaround <br />(for Internet Explorer)</p>
+				</div>
+				<hr />
+				<br />
+				<div id="info">
+				    <p id="infoP"> </p>
+				</div>					
+				<div style="padding:10px 10px;" id="test">
+					<!-- Classes: 'random' for javascript, 'selector' for css-->
+					<div class="random selector">
+						<p><a href="eventlistening.html">Event Listening</a></p>
 						<div class="verticalAlign"></div>
 					</div>
-				</div> <!-- Close #content -->
+					<div class="random selector">
+						<p><a href="positioning.html">Positioning</a></p>
+						<div class="verticalAlign"></div>
+					</div>
+					<div class="random selector special">
+						<p><a href="rangefocus.html">Range, focus</a></p>
+						<div class="verticalAlign"></div>
+					</div>
+					<div class="random selector">
+						<p><a href="showinghiding.html">Show, hide</a></p>
+						<div class="verticalAlign"></div>
+					</div>
+					<div class="random selector">
+						<p><a href="transforms.html">Transformations</a></p>
+						<div class="verticalAlign"></div>
+					</div>
+					<div class="random selector special">
+						<p><a href="dragdrop.html">Drag drop</a></p>
+						<div class="verticalAlign"></div>
+					</div>
+					<div class="random selector">
+						<p><a href="regularexpression.html" >Regular Expressions</a></p>
+						<div class="verticalAlign"></div>
+					</div>
+					<div class="random selector">
+						<p><a href="validatinguserinput.html" >Validating User Input</a></p>
+						<div class="verticalAlign"></div>
+					</div>
+					<div class="random selector">
+						<p><a href="svg.html" >SVG</a></p>
+						<div class="verticalAlign"></div>
+					</div>
+					<div class="random selector special">
+						<p><a href="webstorage.html">Web storage</a></p>
+						<div class="verticalAlign"></div>
+					</div>
+					<div class="random selector">
+						<p><a href="video.html">Video file</a></p>
+						<div class="verticalAlign"></div>
+					</div>
+					<div class="random selector">
+						<p><a href="canvas.html">Canvas</a></p>
+						<div class="verticalAlign"></div>
+					</div>
+					<div class="random selector">
+						<p><a href="websocket.html">Websocket chat pane</a></p>
+						<div class="verticalAlign"></div>
+					</div>
+					<div class="random selector special">
+						<p><a href="bouncingball.html">Bouncing Mk I</a></p>
+						<div class="verticalAlign"></div>
+					</div>
+					<div class="random selector special">
+						<p><a href="bouncingballangled.html">Bouncing Mk II</a></p>
+						<div class="verticalAlign"></div>
+					</div>
+					<div class="random selector">
+						<p><a href="looseends.html">Loose ends</a></p>
+						<div class="verticalAlign"></div>
+					</div>
+					<div class="random selector">
+						<p><a href="promises.html">Promise</a></p>
+						<div class="verticalAlign"></div>
+					</div>
+					<div class="random selector">
+						<p><a href="clock.html">Canvas Clock</a></p>
+						<div class="verticalAlign"></div>
+					</div>
+				</div>
+		
+			</div> 
 		
 		<!-- #EndEditable -->
-			</div> <!-- Close #contentwrapper -->
+			<!-- Close #contentwrapper -->
 		</div> <!-- Close #wrapper -->
 		<div id="footer">
 			<p>&copy; R. Bouwman - Microsoft 70-480 Training</p>

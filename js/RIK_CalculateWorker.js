@@ -3,7 +3,7 @@ onmessage = function (evt) {
 	var maxWork = 25000000; // (increases calculation time exponentially)
 	
 	// Just to randomize it a bit (so you can see it actually does something):
-	var minWork = 15000000;
+	var minWork = 0.5*maxWork;
 	var work = Math.round(minWork + (maxWork-minWork)*Math.random()); // Pick a random value between minWork and maxWork
 	
 	var i = 0;
