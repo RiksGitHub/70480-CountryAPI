@@ -2,7 +2,7 @@
 
 var canvas = document.getElementById("canvasClock"); // Maak van je veld een object aan
 var ctx1 = canvas.getContext("2d"); // Creeer een 2D teken object voor de achtergrond
-var scale = 0.9;
+var scale = 0.7;
 var radius = scale*(canvas.height / 2); // Begin met radius (bijv. precentage halve lengte of hoogte)
 ctx1.translate(radius/scale, radius/scale); // Maak het middelpunt je nulpunt voor de achtergrond
 //ctx2.translate(radius/scale, radius/scale); // Maak het middelpunt je nulpunt voor de wijzers
@@ -11,8 +11,8 @@ drawClock(ctx1); // Teken de klok
 setInterval(function(){drawClock(ctx1, radius)}, 1000); // Teken de klok met onderstaande functies, elke 1000 milliseconden
 //drawClock();
 
-var shadowcolor ="hsla(200,50%,20%,0.5)"
-function drawClock(context) { //Teken de klok in 3 stappen (fucties)
+var shadowcolor ="hsla(200,50%,20%,0.4)"
+function drawClock(context) { //Teken de klok in 3 stappen (functies)
     
 	context.save(); // Store the current transformation matrix
 	context.setTransform(1, 0, 0, 1, 0, 0); // Use the identity matrix while clearing the canvas
@@ -21,8 +21,8 @@ function drawClock(context) { //Teken de klok in 3 stappen (fucties)
 	
 	context.shadowColor = shadowcolor; // stringColor of the shadow;  RGB, RGBA, HSL, HEX, and other inputs are valid.
 	context.shadowOffsetX = 0; // integerHorizontal distance of the shadow, in relation to the text.
-	context.shadowOffsetY = 1; // integerVertical distance of the shadow, in relation to the text.
-	context.shadowBlur = 2; // integerBlurring effect to the shadow, the larger the value, the greater the blur.
+	context.shadowOffsetY = 3; // integerVertical distance of the shadow, in relation to the text.
+	context.shadowBlur = 9; // integerBlurring effect to the shadow, the larger the value, the greater the blur.
 
 	drawFace(context, radius); // 1. De klok achtergrond
 	
@@ -45,7 +45,7 @@ function drawFace(context, radius) {
 	context.arc(0, 0, radius, 0, 2*Math.PI); // Teken een cirkel op 0,0; straal = radius en lopend van 0 tot 360graden
 	context.fillStyle = grd; // Gebruik de gradient als vulling
 	context.fill(); // Pas de vulkleur toe
-	var grad = context.createRadialGradient(0,0,radius*0.95, 0,radius*.01,radius*1.08); // Definieer een circulaire gradient voor de rand, bijvoorbeeld van .95R tot 1.05R
+	var grad = context.createRadialGradient(0,0,radius*0.92, 0,0,radius*1.08); // Definieer een circulaire gradient voor de rand, bijvoorbeeld van .95R tot 1.05R
 	grad.addColorStop(0, '#ace');
 	grad.addColorStop(0.75, '#F0F8FF');
 	grad.addColorStop(1, 'hsl(200,20%,40%)'); // Geef de gradient definities

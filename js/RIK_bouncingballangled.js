@@ -55,10 +55,10 @@ window.onload = function () {
 			switch (evt.keyCode) {
 				case 37: // Keycode 37 = LEFT arrow 
 					if (keysDownTracker[16]){ // SHIFT key ook ingedrukt
-						if (s>0){
-							s--; 
-							if (s>0) {storedSpeed = s;}
-							setStep(s);
+						if (angle>=0){
+							angle=angle-5; 
+							if (angle<0) {angle = angle+360;}
+							setAngle(angle);
 						};
 					} else { // SHIFT key niet ingedrukt
 						setAngle(180); // Indien alleen LEFT arrow is ingedrukt
@@ -95,10 +95,11 @@ window.onload = function () {
 					break;
 				case 39: // Keycode 39 = RIGHT arrow 
 					if (keysDownTracker[16]){ // SHIFT key ook ingedrukt
-						if (s<20){
-							s++;
-							if (s<20){storedSpeed = s;}
-							setStep(s);
+						if (angle<=359){
+							angle=angle+5; 
+							if (angle>359) {angle = angle -360;}
+							//if (s<20){storedSpeed = s;}
+							setAngle(angle);
 						};
 					} else { // SHIFT key niet ingedrukt
 						setAngle(0); // Indien alleen RIGHT arrow is ingedrukt
@@ -133,10 +134,13 @@ window.onload = function () {
 					};
 					break;
                 case 66: // Keycode 66 = 'b'
-	                BESERK();
+	                BERSERK();
 	                break;
                 case 67: // Keycode 67 = 'c'
 	                CHILL();
+	                break;
+                case 82: // Keycode 82 = 'r'
+	                reset();
 	                break;
 			}
 		}
@@ -160,44 +164,33 @@ function getDirection() {
 	setAngle(angle);
 }
 
-var growing; // Variable that sets if linewhidth is getting thicker or thinner (growing = true/false)
-function thickness(lineWidth, minWidth, maxWidth, cycletime){ // current line width(px), min/max linewidth (px), approx. cycletime (milliseconds)
-	if (growing){
-		lineWidth+= (maxWidth-minWidth)/(fps*cycletime/2000);
-		if (lineWidth> maxWidth) {growing = false;};
-	} else {
-		lineWidth-= (maxWidth-minWidth)/(fps*cycletime/2000);
-		if (lineWidth< minWidth) {growing = true;};
-	}
-	return lineWidth;
-}
-
 // Het tekenen van de cirkel (zichzelf herhalend, telkens na het bepalen van een nieuwe (x,y) met 'setNewPoint'):
-var lineWidth =1;
+var growing; // Variable that sets if linewhidth is getting thicker or thinner (growing = true/false)
+var lineWidth = 3; // Variabele voor de (varierende) lijndikte
+var OrbitAngle1 = 0; // the angle of the orbiting ball
+var OrbitAngle2 = 180; // the angle of the orbiting ball
+var OrbitAngle3 = 270; // the angle of the orbiting ball
 function drawBall() {
 	try {
 		setTimeout(function() { // to be able to set framerate
 			requestAnimationFrame(drawBall); // More efficient with cpu than the simpler 'setTimeout' (makes self repeating function)
 			// Randomize de kleur van de rand elke keer dat de cirkel nieuw wordt getekend:
-			//var red = Math.round(Math.random()*255); 
-			//var green = Math.round(Math.random()*255);
-			//var blue = Math.round(Math.random()*255);
 			var rgbChange = randomRGB(1,255,255,255);//"rgb(128,128,128)";
 			var ctxt = c.getContext("2d");
 			ctxt.clearRect(0, 0, c.width, c.height);
 			
-			// Center circle
+			// Main circle
 			ctxt.beginPath();
 			ctxt.arc(x, y, r-(0.5*lineWidth), 0, 360);
 			ctxt.fillStyle = rgbChange;
 			ctxt.fill();
 
-			// Center circle stroke (with shadow)
+			// Main circle stroke (with shadow)
 			ctxt.shadowColor = "hsla(200,50%,20%,0.5)"; // stringColor of the shadow;  RGB, RGBA, HSL, HEX, and other inputs are valid.
 			ctxt.shadowOffsetX = 1; // integerHorizontal distance of the shadow, in relation to the text.
 			ctxt.shadowOffsetY = 2; // integerVertical distance of the shadow, in relation to the text.
 			ctxt.shadowBlur = 1.5; // integerBlurring effect to the shadow, the larger the value, the greater the blur.
-			lineWidth = thickness(lineWidth,1, 0.95*r, 5000); // Strokewidth 1 - 10
+			lineWidth = thickness(lineWidth,3, 0.90*r, 1500); // Strokewidth min -max : 1 - 0.95*r
 			ctxt.lineWidth = lineWidth;
 			ctxt.strokeStyle = rgbFill;
 			ctxt.stroke();
@@ -205,14 +198,13 @@ function drawBall() {
 			var edgeColorTail = rgbChange;//"hsla(200,40%,70%,0.75)";
 			var edgeColorside = "hsla(200,40%,70%,0.75)";
 			var edgeColorNose = "hsla(240,50%,80%,0.95)";
-			// Center circle outer edges
+			
+			// Main circle side edges:
 			ctxt.lineWidth = 1;
-			// Side edges:
 			ctxt.beginPath();
 			ctxt.strokeStyle = edgeColorside;
 			ctxt.arc(x, y, r, (1+angle/180)*Math.PI, (1.2+angle/180)*Math.PI);
 			ctxt.stroke();
-			
 			ctxt.beginPath();
 			ctxt.strokeStyle = edgeColorside;
 			ctxt.arc(x, y, r, (0.8+angle/180)*Math.PI, (1+angle/180)*Math.PI);
@@ -223,9 +215,7 @@ function drawBall() {
 			ctxt.shadowOffsetX = 3*Math.cos(angle*Math.PI/180); // integerHorizontal distance of the shadow, in relation to the text.
 			ctxt.shadowOffsetY = 3*Math.sin(angle*Math.PI/180); // integerVertical distance of the shadow, in relation to the text.
 			ctxt.shadowBlur = 3.5; // integerBlurring effect to the shadow, the larger the value, the greater the blur.
-
 			ctxt.lineWidth = 2;
-			
 			ctxt.strokeStyle = edgeColorNose;
 			ctxt.beginPath();
 			ctxt.arc(x, y, r, (-0.2+angle/180)*Math.PI, (-0.1+angle/180)*Math.PI);
@@ -234,21 +224,29 @@ function drawBall() {
 			ctxt.arc(x, y, r, (0.1+angle/180)*Math.PI, (0.2+angle/180)*Math.PI);
 			ctxt.stroke();
 			
-			// Center circle inner edge
+			// Main circle inner edge
 			ctxt.shadowColor = "hsla(200,50%,20%,0.5)"; // stringColor of the shadow;  RGB, RGBA, HSL, HEX, and other inputs are valid.
 			ctxt.shadowOffsetX = 1; // integerHorizontal distance of the shadow, in relation to the text.
 			ctxt.shadowOffsetY = 2; // integerVertical distance of the shadow, in relation to the text.
 			ctxt.shadowBlur = 1.5; // integerBlurring effect to the shadow, the larger the value, the greater the blur.
-
 			ctxt.beginPath();
 			ctxt.lineWidth = 1;
 			ctxt.strokeStyle = edgeColorside;
 			ctxt.arc(x, y, r-lineWidth, 0, 360);
 			ctxt.stroke();
 			
+			// Orbiting circle 01
+			var distance01 = r+3;
+			var rad01 = 1.5;
+			ctxt.beginPath();
+			// Orbiting around main circle:
+			ctxt.arc(x+distance01*Math.cos(OrbitAngle1*Math.PI/180), y+distance01*Math.sin(OrbitAngle1*Math.PI/180), rad01, 0, 2*Math.PI);
+			ctxt.fillStyle = rgbFill;
+			ctxt.fill();
+
 			// Trailing circle 1
 			var distance1 = r+8;
-			var rad1 = 5;//0.5*r;
+			var rad1 = 5;
 			ctxt.beginPath();
 			ctxt.arc(x-distance1*Math.cos(angle*Math.PI/180), y-distance1*Math.sin(angle*Math.PI/180), rad1, 0, 2*Math.PI);
 			ctxt.fillStyle = rgbFill;
@@ -258,6 +256,16 @@ function drawBall() {
 			ctxt.lineWidth = 1;
 			ctxt.strokeStyle = edgeColorside;
 			ctxt.stroke();
+			
+			// Orbiting circle 02
+			var distance02 = rad1+3;
+			var rad02 = 2;
+			ctxt.beginPath();
+			// Orbiting around trailing circle 1:
+			ctxt.arc(x+distance02*Math.cos(OrbitAngle2*Math.PI/180)-distance1*Math.cos(angle*Math.PI/180),
+			 y+distance02*Math.sin(OrbitAngle2*Math.PI/180)-distance1*Math.sin(angle*Math.PI/180), rad01, 0, 2*Math.PI);
+			ctxt.fillStyle = rgbFill;
+			ctxt.fill();
 			
 			// Trailing circle 2
 			var distance2 = distance1 + 10;
@@ -271,7 +279,7 @@ function drawBall() {
 			ctxt.fillStyle = rgbFill;
 			ctxt.fill();
 			
-			// Trailing circle 2 (partial)edge
+			// Trailing circle 2 (partial) edge
 			ctxt.shadowColor = "transparent";
 			ctxt.beginPath();
 			ctxt.arc(x-distance2*Math.cos(angle*Math.PI/180), y-distance2*Math.sin(angle*Math.PI/180), rad2, (0.8+angle/180)*Math.PI, (1.2+angle/180)*Math.PI);
@@ -279,6 +287,15 @@ function drawBall() {
 			ctxt.strokeStyle = edgeColorTail;
 			ctxt.stroke();
 
+			// Orbiting circle 03
+			var distance03 = rad2+3;
+			var rad03 = 1.25;
+			ctxt.beginPath();
+			// Orbiting around trailing circle 2:
+			ctxt.arc(x+distance03*Math.cos(OrbitAngle3*Math.PI/180)-distance2*Math.cos(angle*Math.PI/180),
+			 y+distance03*Math.sin(OrbitAngle3*Math.PI/180)-distance2*Math.sin(angle*Math.PI/180), rad03, 0, 2*Math.PI);
+			ctxt.fillStyle = rgbFill;
+			ctxt.fill();
 
 			// Controleer telkens wat de waarden in de pagina zijn voordat de cirkel wordt getekend (die zijn leidend):
 			s = readValue("stepSlider"); 
@@ -286,11 +303,33 @@ function drawBall() {
 			angle = readValue("angleSlider");
 			// Bepaal met deze waarden waar de nieuwe (x,y) komt:
 			setNewPoint();
+			
+			// Voor de 'orbiting' cirkeltjes, bepaal de nieuwe hoek:
+			OrbitAngle1 = OrbitAngle1+OrbitAngleStepSize(5000, 1.8);
+			OrbitAngle2 = OrbitAngle2-OrbitAngleStepSize(5000, 2.0);
+			OrbitAngle3 = OrbitAngle3+OrbitAngleStepSize(5000, 2.2);
 		}, 1000 / fps);
 	} catch (e) {
 		alert(e.message);
 	}
 }
+
+// Berekenen van de nieuwe lijndikte:
+function thickness(lineWidth, minWidth, maxWidth, cycletime){ // current line width(px), min/max linewidth (px), approx. cycletime (milliseconds)
+	if (growing){
+		lineWidth+= (maxWidth-minWidth)/(fps*cycletime/2000);
+		if (lineWidth> maxWidth) {growing = false;};
+	} else {
+		lineWidth-= (maxWidth-minWidth)/(fps*cycletime/2000);
+		if (lineWidth< minWidth) {growing = true;};
+	}
+	return lineWidth;
+}
+
+// Bepaal hoek increment bij gegeven cycle tijd en rondes per cycle
+function OrbitAngleStepSize(CycleTime, RoundsPerCycleTime){
+	return (360*RoundsPerCycleTime)/(fps*CycleTime/2000);
+};
 
 // Bepaal a.d.h.v. de randvoorwaarden (huidige locatie, richting en de rand) waar de volgende (x,y) komt:
 function setNewPoint() { 
@@ -392,7 +431,7 @@ function BERSERK() {
 function CHILL() {
     clearInterval(beserkSettings);
     setStep(2);
-    setFps(60);
+    setFps(20);
 };
 
 function reset() { // Startpositie (x, y), straal (r).

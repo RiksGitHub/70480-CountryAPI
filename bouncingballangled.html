@@ -11,7 +11,8 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		
 		<!-- The following is required so phones determine text size and stuff based on ACTUAL window size, and not some virtual larger size -->
-		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<!--meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"-->
+		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=yes, minimum-scale=1, maximum-scale=2.0">
 		
 		<!-- CSS for the menu -->
 		<link href="css/helper.css" media="screen" rel="stylesheet" type="text/css" />
@@ -31,9 +32,13 @@
 		</script>
 		<!-- #BeginEditable "TopScripts" -->
 		
+		
+		
 		<style>
+
+
 			.windowDiv{display:inline-block; position:relative; margin:10px auto; padding:10px;
-						border:2px white outset; text-align:center; width:51%; min-width:350px;
+						border:2px white outset; text-align:center; width:51%; min-width:330px;
 						background-color:hsl(200,30%,60%); background-color:hsla(200,30%,60%,0.4)}
 			canvas {
 				border: 1pt hsl(200,100%,90%) outset; 
@@ -53,6 +58,8 @@
 			}
 			input[type=number]{border:1px white inset; width:100%; padding: 2px 0; text-align:center;}
 		</style>
+		
+		
 		
 		<!-- #EndEditable -->
 	
@@ -182,7 +189,7 @@
 						<p id="ballValues" style="font-size:x-small;">&alpha;: 45<br />RGB 0, 0, 0</p>
 					</div>
 					<div style="position:absolute; left:0px; top:0px; text-align:left;">
-						<h2>Steer with arrows <span style="display:inline-block;">(Shift for speed)</span></h2>
+						<h2>Use <span style="color:hsl(200,80%,50%)">&larr;&uarr; &darr;&rarr;</span> and <span style="font-weight:lighter; letter-spacing:1px;color:hsl(200,80%,50%)">Shift</span> to steer</h2>
 					</div>
 					<canvas id="c" width="300" height="200"></canvas>
 				</div>
@@ -257,6 +264,17 @@
 
 		<script>
 			
+			// Not using the worker:
+			document.getElementById("intensiveWork2").onclick = function () {
+				var result = document.getElementById("workResult");
+				result.innerHTML = "Calculating...";
+				window.setTimeout(pietje, 0); // Set a delay of 0 seconds. This is only because otherwise it will not display "Calculating..."
+				function pietje(){
+					var maxWork =25000000;
+					result.innerHTML = DoIntensiveWork(maxWork); // Returns a string with the result
+				}
+			};
+
 			// Using the worker:
 			document.getElementById("intensiveWork").onclick = function () {
 				var result = document.getElementById("workResult");
@@ -284,6 +302,23 @@
 					result.innerHTML = "Worker stopped!";
 				}
 			};
+
+			// The following function does nothing more than calculate the sum of a series of squares and return the result as a string:
+			function DoIntensiveWork(maxWork) {
+			    // Just to randomize it a bit (so you can see it actually does something):
+			    var minWork = 0.5 * maxWork;
+			    var work = Math.round(minWork + (maxWork - minWork) * Math.random()); // Pick a random value between minWork and maxWork
+		
+			    var i = 0;
+			    var a = new Array(work); // New array, with length 'work')
+			    var sum = 0;
+			    for (i = 0; i < work; i++) {
+			        // Doing this work with the array makes it a take a bit longer (nothing to do with 'sum' or anything else)
+			        a[i] = i * i; // fills the array with a (long) list of squares [0,1,4,9,16,25,..]
+			        sum += i * i; // sum = "sum + i * i" adds up all of the squares
+			    }
+			    return 'Work result: ' + sum.toExponential(3).toString(); // 'toExponential(3)' makes it 3 digits after the comma
+			}
 
 			document.getElementById("stepSlider").addEventListener("change", stepChange);
 			function stepChange() {
